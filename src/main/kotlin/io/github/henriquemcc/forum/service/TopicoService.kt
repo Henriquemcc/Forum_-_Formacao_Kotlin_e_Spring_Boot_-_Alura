@@ -63,4 +63,10 @@ class TopicoService(private var topicos: List<Topico>) {
     fun listar(): List<Topico> {
         return topicos
     }
+
+    fun buscarPorId(id: Long): Topico {
+        return topicos.first {
+            t -> t.id == id
+        }
+    }
 }
