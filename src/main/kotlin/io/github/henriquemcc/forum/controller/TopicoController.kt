@@ -1,5 +1,6 @@
 package io.github.henriquemcc.forum.controller
 
+import io.github.henriquemcc.forum.dto.NovoTopicoDto
 import io.github.henriquemcc.forum.model.Topico
 import io.github.henriquemcc.forum.service.TopicoService
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,7 +25,7 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
-    fun cadastrar(@RequestBody topico: Topico) {
-        service.cadastrar(topico)
+    fun cadastrar(@RequestBody dto: NovoTopicoDto) {
+        service.cadastrar(dto)
     }
 }
