@@ -3,6 +3,7 @@ package io.github.henriquemcc.forum.controller
 import io.github.henriquemcc.forum.dto.NovoTopicoForm
 import io.github.henriquemcc.forum.dto.TopicoView
 import io.github.henriquemcc.forum.service.TopicoService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -25,7 +26,7 @@ class TopicoController(private val service: TopicoService) {
     }
 
     @PostMapping
-    fun cadastrar(@RequestBody dto: NovoTopicoForm) {
+    fun cadastrar(@RequestBody @Valid dto: NovoTopicoForm) {
         service.cadastrar(dto)
     }
 }
