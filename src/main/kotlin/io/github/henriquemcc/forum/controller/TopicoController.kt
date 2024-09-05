@@ -1,7 +1,7 @@
 package io.github.henriquemcc.forum.controller
 
-import io.github.henriquemcc.forum.dto.NovoTopicoDto
-import io.github.henriquemcc.forum.model.Topico
+import io.github.henriquemcc.forum.dto.NovoTopicoForm
+import io.github.henriquemcc.forum.dto.TopicoView
 import io.github.henriquemcc.forum.service.TopicoService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    fun listar(): List<Topico> {
+    fun listar(): List<TopicoView> {
         return service.listar()
     }
 
     @GetMapping("/{id}")
-    fun buscarPorId(@PathVariable id: Long): Topico {
+    fun buscarPorId(@PathVariable id: Long): TopicoView {
         return service.buscarPorId(id)
     }
 
     @PostMapping
-    fun cadastrar(@RequestBody dto: NovoTopicoDto) {
+    fun cadastrar(@RequestBody dto: NovoTopicoForm) {
         service.cadastrar(dto)
     }
 }
