@@ -1,5 +1,6 @@
 package io.github.henriquemcc.forum.service
 
+import io.github.henriquemcc.forum.dto.AtualizarTopicoForm
 import io.github.henriquemcc.forum.dto.NovoTopicoForm
 import io.github.henriquemcc.forum.dto.TopicoView
 import io.github.henriquemcc.forum.mapper.TopicoFormMapper
@@ -26,5 +27,22 @@ class TopicoService(
         if (topico.id == null)
             topico.id = topicos.size.toLong() + 1
         topicos.add(topico)
+    }
+
+    fun atualizar(form: AtualizarTopicoForm) {
+        val topico = topicos.first {
+            it.id == form.id
+        }
+        topicos.remove(topico)
+        topicos.add(Topico(
+            id = form.id,
+            titulo = form.titulo,
+            mensagem = form.mensagem,
+            autor = topico.autor,
+            curso = topico.curso,
+            respostas = topico.respostas,
+            status = topico.status,
+            dataCriacao = topico.dataCriacao
+        ))
     }
 }
