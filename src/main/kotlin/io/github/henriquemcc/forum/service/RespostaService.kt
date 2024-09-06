@@ -1,34 +1,25 @@
 package io.github.henriquemcc.forum.service
 
-import io.github.henriquemcc.forum.dto.NovaRespostaForm
-import io.github.henriquemcc.forum.dto.RespostaView
-import io.github.henriquemcc.forum.mapper.RespostaFormMapper
-import io.github.henriquemcc.forum.mapper.RespostaViewMapper
-import io.github.henriquemcc.forum.model.Curso
 import io.github.henriquemcc.forum.model.Resposta
-import io.github.henriquemcc.forum.model.Topico
-import io.github.henriquemcc.forum.model.Usuario
 import org.springframework.stereotype.Service
 
 @Service
 class RespostaService(
     private val respostas: MutableList<Resposta> = mutableListOf(),
-    private val respostaFormMapper: RespostaFormMapper,
-    private val respostaViewMapper: RespostaViewMapper,
+    private val topicoService: TopicoService,
 ) {
 
-    fun listar(): List<RespostaView> {
-        return respostas.map {
-            r -> respostaViewMapper.map(r)
-        }
+    fun listarPorIdTopico(idTopico: Long): List<Resposta> {
+        return respostas.filter { r-> r.topico == topicoService.buscarPorId(idTopico) }
     }
 
-    fun buscarPorId(id: Long): RespostaView {
-        val resposta = respostas.first { r -> r.id == id }
-        return respostaViewMapper.map(resposta)
+    fun buscarPorIdResposta(idTopico: Long, idResposta: Long): Resposta {
+        return respostas.first { r -> (r.topico == topicoService.buscarPorId(idTopico) && r.id == idResposta) }
     }
 
-    fun cadastrar(dto: NovaRespostaForm) {
-        respostas.add(respostaFormMapper.map(dto))
+    fun cadastrar(resposta: Resposta) {
+        if (resposta.id == null)
+            resposta.id = respostas.size.toLong() + 1
+        respostas.add(resposta)
     }
 }

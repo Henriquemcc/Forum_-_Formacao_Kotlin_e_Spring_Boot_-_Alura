@@ -16,7 +16,6 @@ class RespostaFormMapper(
         return Resposta(
             mensagem = t.mensagem,
             autor = usuarioService.buscarPorId(t.idAutor),
-            topico = topicoService.buscarPorIdTopico(t.idTopico),
             solucao = false
             )
     }

@@ -3,10 +3,10 @@ package io.github.henriquemcc.forum.model
 import java.time.LocalDateTime
 
 data class Resposta(
-    val id: Long? = null,
+    var id: Long? = null,
     val mensagem: String,
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
     val autor: Usuario,
-    val topico: Topico,
+    var topico: Topico? = null,
     val solucao: Boolean,
 )

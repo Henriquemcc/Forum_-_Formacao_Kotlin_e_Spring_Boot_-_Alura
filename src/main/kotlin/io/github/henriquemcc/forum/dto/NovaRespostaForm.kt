@@ -10,7 +10,4 @@ data class NovaRespostaForm(
 
     @field:NotNull
     val idAutor: Long,
-
-    @field:NotNull
-    val idTopico: Long,
 )

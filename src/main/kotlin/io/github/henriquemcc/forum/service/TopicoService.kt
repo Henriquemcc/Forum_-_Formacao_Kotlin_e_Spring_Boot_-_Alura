@@ -10,32 +10,21 @@ import org.springframework.stereotype.Service
 @Service
 class TopicoService(
     private val topicos: MutableList<Topico> = mutableListOf(),
-    private val topicoViewMapper: TopicoViewMapper,
-    private val topicoFormMapper: TopicoFormMapper,
 ) {
 
-    fun listar(): List<TopicoView> {
-        return topicos.map {
-            t -> topicoViewMapper.map(t)
-        }
+    fun listar(): List<Topico> {
+        return topicos
     }
 
-    fun buscarPorId(id: Long): TopicoView {
-        val topico = topicos.first {
+    fun buscarPorId(id: Long): Topico {
+        return topicos.first {
             t -> t.id == id
         }
-        return topicoViewMapper.map(topico)
     }
 
-    fun buscarPorIdTopico(id: Long): Topico {
-        return topicos.first { t ->
-            t.id == id
-        }
-    }
-
-    fun cadastrar(form: NovoTopicoForm) {
-        val topico = topicoFormMapper.map(form)
-        topico.id = topicos.size.toLong() + 1
+    fun cadastrar(topico: Topico) {
+        if (topico.id == null)
+            topico.id = topicos.size.toLong() + 1
         topicos.add(topico)
     }
 }
