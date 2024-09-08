@@ -2,25 +2,17 @@ package io.github.henriquemcc.forum.controller
 
 import io.github.henriquemcc.forum.dto.NovaRespostaForm
 import io.github.henriquemcc.forum.dto.RespostaView
-import io.github.henriquemcc.forum.mapper.RespostaFormMapper
-import io.github.henriquemcc.forum.mapper.RespostaViewMapper
 import io.github.henriquemcc.forum.service.RespostaService
-import io.github.henriquemcc.forum.service.TopicoService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/topicos/{idTopico}/respostas")
-class RespostaController(
-    private val service: RespostaService,
-    private val respostaViewMapper: RespostaViewMapper,
-    private val respostaFormMapper: RespostaFormMapper,
-    private val topicoService: TopicoService,
-    ) {
+class RespostaController(private val service: RespostaService) {
 
     @GetMapping
     fun listarPorIdTopico(@PathVariable idTopico: Long): List<RespostaView> {
-        return service.listarPorIdTopico(idTopico).map { r -> respostaViewMapper.map(r) }
+        return service.listarPorIdTopicoListRespostaView(idTopico)
     }
 
     @GetMapping("/{idResposta}")
@@ -30,8 +22,6 @@ class RespostaController(
 
     @PostMapping
     fun cadastrar(@RequestBody @Valid form: NovaRespostaForm, @PathVariable idTopico: Long) {
-        val resposta = respostaFormMapper.map(form)
-        resposta.topico = topicoService.buscarPorIdTopico(idTopico)
-        service.cadastrar(resposta)
+        service.cadastrar(form, idTopico)
     }
 }
