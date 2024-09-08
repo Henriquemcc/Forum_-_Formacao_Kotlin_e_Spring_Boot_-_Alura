@@ -33,31 +33,36 @@ class TopicoService(
         return topicoViewMapper.map(buscarPorIdTopico(id))
     }
 
-    fun cadastrar(topico: Topico) {
+    fun cadastrar(topico: Topico): Topico {
         if (topico.id == null)
             topico.id = topicos.size.toLong() + 1
         topicos.add(topico)
+        return topico
     }
 
-    fun cadastrar(topico: NovoTopicoForm) {
-        cadastrar(topicoFormMapper.map(topico))
+    fun cadastrar(topico: NovoTopicoForm): TopicoView {
+        val topicoCadastrado = cadastrar(topicoFormMapper.map(topico))
+        return topicoViewMapper.map(topicoCadastrado)
     }
 
-    fun atualizar(form: AtualizarTopicoForm) {
-        val topico = topicos.first {
+    fun atualizar(form: AtualizarTopicoForm): TopicoView {
+        val topicoRemovido = topicos.first {
             it.id == form.id
         }
-        topicos.remove(topico)
-        topicos.add(Topico(
+        topicos.remove(topicoRemovido)
+        val topicoAtualizado = Topico(
             id = form.id,
             titulo = form.titulo,
             mensagem = form.mensagem,
-            autor = topico.autor,
-            curso = topico.curso,
-            respostas = topico.respostas,
-            status = topico.status,
-            dataCriacao = topico.dataCriacao
-        ))
+            autor = topicoRemovido.autor,
+            curso = topicoRemovido.curso,
+            respostas = topicoRemovido.respostas,
+            status = topicoRemovido.status,
+            dataCriacao = topicoRemovido.dataCriacao
+        )
+        topicos.add(topicoAtualizado)
+
+        return topicoViewMapper.map(topicoAtualizado)
     }
 
     fun deletar(id: Long) {
