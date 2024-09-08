@@ -25,13 +25,13 @@ class RespostaController(
 
     @GetMapping("/{idResposta}")
     fun buscarPorIdResposta(@PathVariable idTopico: Long, @PathVariable idResposta: Long): RespostaView {
-        return respostaViewMapper.map(service.buscarPorIdResposta(idTopico, idResposta))
+        return service.buscarPorIdRespostaView(idTopico, idResposta)
     }
 
     @PostMapping
     fun cadastrar(@RequestBody @Valid form: NovaRespostaForm, @PathVariable idTopico: Long) {
         val resposta = respostaFormMapper.map(form)
-        resposta.topico = topicoService.buscarPorId(idTopico)
+        resposta.topico = topicoService.buscarPorIdTopico(idTopico)
         service.cadastrar(resposta)
     }
 }

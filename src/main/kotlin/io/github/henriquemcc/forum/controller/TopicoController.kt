@@ -3,8 +3,6 @@ package io.github.henriquemcc.forum.controller
 import io.github.henriquemcc.forum.dto.AtualizarTopicoForm
 import io.github.henriquemcc.forum.dto.NovoTopicoForm
 import io.github.henriquemcc.forum.dto.TopicoView
-import io.github.henriquemcc.forum.mapper.TopicoFormMapper
-import io.github.henriquemcc.forum.mapper.TopicoViewMapper
 import io.github.henriquemcc.forum.service.TopicoService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -18,25 +16,21 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/topicos")
-class TopicoController(
-    private val service: TopicoService,
-    private val topicoViewMapper: TopicoViewMapper,
-    private val topicoFormMapper: TopicoFormMapper,
-    ) {
+class TopicoController(private val service: TopicoService) {
 
     @GetMapping
     fun listar(): List<TopicoView> {
-        return service.listar().map { t -> topicoViewMapper.map(t) }
+        return service.listarListTopicoView()
     }
 
     @GetMapping("/{id}")
     fun buscarPorId(@PathVariable id: Long): TopicoView {
-        return topicoViewMapper.map(service.buscarPorId(id))
+        return service.buscarPorIdTopicoView(id)
     }
 
     @PostMapping
     fun cadastrar(@RequestBody @Valid form: NovoTopicoForm) {
-        service.cadastrar(topicoFormMapper.map(form))
+        service.cadastrar(form)
     }
 
     @PutMapping
