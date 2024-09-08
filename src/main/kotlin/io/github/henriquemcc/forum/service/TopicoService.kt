@@ -45,4 +45,11 @@ class TopicoService(
             dataCriacao = topico.dataCriacao
         ))
     }
+
+    fun deletar(id: Long) {
+        val topico = topicos.first {
+            it.id == id
+        }
+        topicos.remove(topico)
+    }
 }
