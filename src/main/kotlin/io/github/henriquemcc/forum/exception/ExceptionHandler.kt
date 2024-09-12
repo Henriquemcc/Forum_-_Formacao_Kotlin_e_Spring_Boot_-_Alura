@@ -44,10 +44,14 @@ class ExceptionHandler {
         exception: MethodArgumentNotValidException,
         request: HttpServletRequest
     ): ErrorView {
+        val errorMessage = HashMap<String, String>()
+        exception.bindingResult.fieldErrors.forEach {
+            e -> errorMessage.put(e.field, e.defaultMessage ?: "")
+        }
         return ErrorView(
             status = HttpStatus.BAD_REQUEST.value(),
             error = HttpStatus.BAD_REQUEST.name,
-            message = exception.message,
+            message = errorMessage.toString(),
             path = request.servletPath
         )
     }
