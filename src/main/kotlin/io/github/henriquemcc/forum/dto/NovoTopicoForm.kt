@@ -6,11 +6,11 @@ import jakarta.validation.constraints.Size
 
 data class NovoTopicoForm(
 
-    @field:NotEmpty
-    @field:Size(min = 5, max = 100)
+    @field:NotEmpty(message = "Titulo nao pode ser em branco")
+    @field:Size(min = 5, max = 100, message = "Titulo deve ter enter 5 e 100 caracteres")
     val titulo: String,
 
-    @field:NotEmpty
+    @field:NotEmpty(message = "Mensagem nao pode ser em branco")
     val mensagem: String,
 
     @field:NotNull
