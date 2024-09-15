@@ -10,8 +10,12 @@ Os arquivos oficiais do curso, desenvolvidos pelo instrutor, estão disponíveis
 
 [<img src="https://www.alura.com.br/assets/api/cursos/api-rest-kotlin-spring-boot-camada-web.svg" width="16px" height="16px"> API REST com Kotlin e Spring Boot: Camada Web](https://github.com/alura-cursos/2208-kotlin-spring).
 
+[<img src="https://www.alura.com.br/assets/api/cursos/api-rest-kotlin-spring-boot-camada-persistencia.svg" width="16px" height="16px"> API REST com Kotlin e Spring Boot: Camada de persistência](https://github.com/alura-cursos/2210-kotlin-spring).
+
 ## Cursos
 
 Os cursos em que estes arquivos foram desenvolvidos:
 
 [<img src="https://www.alura.com.br/assets/api/cursos/api-rest-kotlin-spring-boot-camada-web.svg" width="16px" height="16px"> API REST com Kotlin e Spring Boot: Camada Web](https://cursos.alura.com.br/course/api-rest-kotlin-spring-boot-camada-web).
+
+[<img src="https://www.alura.com.br/assets/api/cursos/api-rest-kotlin-spring-boot-camada-persistencia.svg" width="16px" height="16px"> API REST com Kotlin e Spring Boot: Camada de persistência](https://cursos.alura.com.br/course/api-rest-kotlin-spring-boot-camada-persistencia).
