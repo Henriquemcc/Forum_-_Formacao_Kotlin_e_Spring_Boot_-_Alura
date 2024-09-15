@@ -3,21 +3,24 @@ package io.github.henriquemcc.forum.service
 import io.github.henriquemcc.forum.dto.AtualizarRespostaForm
 import io.github.henriquemcc.forum.dto.NovaRespostaForm
 import io.github.henriquemcc.forum.dto.RespostaView
+import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.mapper.RespostaFormMapper
 import io.github.henriquemcc.forum.mapper.RespostaViewMapper
 import io.github.henriquemcc.forum.model.Resposta
+import io.github.henriquemcc.forum.repository.RespostaRepository
 import org.springframework.stereotype.Service
 
 @Service
 class RespostaService(
-    private val respostas: MutableList<Resposta> = mutableListOf(),
+    private val repository: RespostaRepository,
     private val topicoService: TopicoService,
     private val respostaViewMapper: RespostaViewMapper,
-    private val respostaFormMapper: RespostaFormMapper
+    private val respostaFormMapper: RespostaFormMapper,
+    private val notFoundMessage: String = "Resposta nao encontrada!",
 ) {
 
     fun listarPorIdTopicoListResposta(idTopico: Long): List<Resposta> {
-        return respostas.filter { r-> r.topico == topicoService.buscarPorIdTopico(idTopico) }
+        return repository.findAll().filter { r-> r.topico == topicoService.buscarPorIdTopico(idTopico) }
     }
 
     fun listarPorIdTopicoListRespostaView(idTopico: Long): List<RespostaView> {
@@ -25,7 +28,7 @@ class RespostaService(
     }
 
     fun buscarPorIdResposta(idTopico: Long, idResposta: Long): Resposta {
-        return respostas.first { r -> (r.topico == topicoService.buscarPorIdTopico(idTopico) && r.id == idResposta) }
+        return repository.findAll().first { r -> (r.topico == topicoService.buscarPorIdTopico(idTopico) && r.id == idResposta) }
     }
 
     fun buscarPorIdRespostaView(idTopico: Long, idResposta: Long): RespostaView {
@@ -40,34 +43,17 @@ class RespostaService(
     }
 
     fun cadastrar(resposta: Resposta): Resposta {
-        if (resposta.id == null)
-            resposta.id = respostas.size.toLong() + 1
-        respostas.add(resposta)
+        repository.save(resposta)
         return resposta
     }
 
     fun atualizar(form: AtualizarRespostaForm, idResposta: Long): RespostaView? {
-        val respostaRemovida = respostas.first {
-            it.id == idResposta
-        }
-        respostas.remove(respostaRemovida)
-        val respostaAtualizada = Resposta(
-            id = respostaRemovida.id,
-            mensagem = form.mensagem,
-            dataCriacao = respostaRemovida.dataCriacao,
-            autor = respostaRemovida.autor,
-            topico = respostaRemovida.topico,
-            solucao = respostaRemovida.solucao
-        )
-        respostas.add(respostaAtualizada)
-
-        return respostaViewMapper.map(respostaAtualizada)
+        val resposta = repository.findById(idResposta).orElseThrow{NotFoundException(notFoundMessage)}
+        resposta.mensagem = form.mensagem
+        return respostaViewMapper.map(resposta)
     }
 
     fun deletar(id: Long) {
-        val resposta = respostas.first {
-            it.id == id
-        }
-        respostas.remove(resposta)
+        repository.deleteById(id)
     }
 }
