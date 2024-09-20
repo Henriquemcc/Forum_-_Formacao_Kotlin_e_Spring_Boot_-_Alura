@@ -3,7 +3,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/forum
     username: 'myuser'
-    password: 'verysecret'
+    password: 'secret'
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     defer-datasource-initialization: true
