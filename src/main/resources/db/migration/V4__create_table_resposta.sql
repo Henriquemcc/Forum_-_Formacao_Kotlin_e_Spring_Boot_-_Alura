@@ -4,7 +4,7 @@ create table resposta(
     data_criacao datetime not null,
     topico_id bigint not null,
     autor_id bigint not null,
-    solucao int(1) not null,
+    solucao int not null default 1,
     primary key(id),
     foreign key (topico_id) references topico(id),
     foreign key (autor_id) references usuario(id)
