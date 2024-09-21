@@ -1,11 +1,9 @@
 package io.github.henriquemcc.forum.model
 
 import jakarta.persistence.*
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import java.time.LocalDateTime
 
 @Entity
-@EnableAutoConfiguration
 data class Topico(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
