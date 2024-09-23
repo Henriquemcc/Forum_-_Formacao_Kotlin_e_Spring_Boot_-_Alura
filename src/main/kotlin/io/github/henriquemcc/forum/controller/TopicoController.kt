@@ -6,6 +6,8 @@ import io.github.henriquemcc.forum.dto.TopicoView
 import io.github.henriquemcc.forum.service.TopicoService
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.util.UriBuilder
 import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
@@ -26,9 +27,8 @@ import org.springframework.web.util.UriComponentsBuilder
 class TopicoController(private val service: TopicoService) {
 
     @GetMapping
-    fun listar(@RequestParam(required = false) nomeCurso: String?): List<TopicoView> {
-
-        return service.listarListTopicoView(nomeCurso)
+    fun listar(@RequestParam(required = false) nomeCurso: String?, paginacao: Pageable): Page<TopicoView> {
+        return service.listar(nomeCurso, paginacao)
     }
 
     @GetMapping("/{id}")

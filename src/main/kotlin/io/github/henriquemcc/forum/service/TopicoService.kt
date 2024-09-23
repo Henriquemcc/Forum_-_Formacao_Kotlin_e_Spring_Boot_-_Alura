@@ -8,6 +8,8 @@ import io.github.henriquemcc.forum.mapper.TopicoFormMapper
 import io.github.henriquemcc.forum.mapper.TopicoViewMapper
 import io.github.henriquemcc.forum.model.Topico
 import io.github.henriquemcc.forum.repository.TopicoRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,16 +20,13 @@ class TopicoService(
     private val notFoundMessage: String = "Topico nao encontrado!",
 ) {
 
-    fun listarListTopico(nomeCurso: String?): List<Topico> {
-        return if (nomeCurso == null) {
-            repository.findAll()
+    fun listar(nomeCurso: String?, paginacao: Pageable): Page<TopicoView> {
+        val topicos = if (nomeCurso == null) {
+            repository.findAll(paginacao)
         } else {
-            repository.findByCursoNome(nomeCurso)
+            repository.findByCursoNome(nomeCurso, paginacao)
         }
-    }
-
-    fun listarListTopicoView(nomeCurso: String?): List<TopicoView> {
-        return listarListTopico(nomeCurso).map { t -> topicoViewMapper.map(t) }
+        return topicos.map { t -> topicoViewMapper.map(t) }
     }
 
     fun buscarPorIdTopico(id: Long): Topico {
