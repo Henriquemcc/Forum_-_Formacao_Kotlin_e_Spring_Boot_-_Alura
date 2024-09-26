@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4a4af59b-936b-4a66-8578-9540c61bff60",
+		"_postman_id": "356b4b2b-8431-4a35-8bec-d38c17cf448e",
 		"name": "API REST com Kotlin e Spring Boot: Camada Web",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21485404"
@@ -42,6 +42,25 @@
 		},
 		{
 			"name": "GET Tópicos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/topicos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Tópicos Relatorio",
 			"request": {
 				"method": "GET",
 				"header": [],
