@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "356b4b2b-8431-4a35-8bec-d38c17cf448e",
+		"_postman_id": "3d9abb5d-cfd1-4711-982f-5201b3b1671c",
 		"name": "API REST com Kotlin e Spring Boot: Camada Web",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21485404"
@@ -61,6 +61,25 @@
 		},
 		{
 			"name": "GET Tópicos Relatorio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/topicos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Tópicos Relatorio Topicos Não Respondidos",
 			"request": {
 				"method": "GET",
 				"header": [],
