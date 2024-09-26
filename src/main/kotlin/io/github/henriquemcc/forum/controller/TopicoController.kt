@@ -1,9 +1,6 @@
 package io.github.henriquemcc.forum.controller
 
-import io.github.henriquemcc.forum.dto.AtualizarTopicoForm
-import io.github.henriquemcc.forum.dto.NovoTopicoForm
-import io.github.henriquemcc.forum.dto.TopicoPorCategoriaDto
-import io.github.henriquemcc.forum.dto.TopicoView
+import io.github.henriquemcc.forum.dto.*
 import io.github.henriquemcc.forum.service.TopicoService
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
@@ -70,5 +67,10 @@ class TopicoController(private val service: TopicoService) {
     @GetMapping("/relatorio")
     fun relatorio(): List<TopicoPorCategoriaDto> {
         return service.relatorio()
+    }
+
+    @GetMapping("/relatorioTopicosNaoRespondidos")
+    fun relatorioTopicosNaoRespondidos(): List<TopicoNaoRespondidoDto> {
+        return service.relatorioTopicosNaoRespondidos()
     }
 }
