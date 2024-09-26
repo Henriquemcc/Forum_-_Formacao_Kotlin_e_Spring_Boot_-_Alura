@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6394b1ed-d6f6-46e3-9f00-f5b3b1a04a15",
+		"_postman_id": "4a4af59b-936b-4a66-8578-9540c61bff60",
 		"name": "API REST com Kotlin e Spring Boot: Camada Web",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21485404"
@@ -204,6 +204,32 @@
 					"port": "8080",
 					"path": [
 						"topicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Tópico 1",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/topicos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"topicos",
+						"1"
 					]
 				}
 			},
