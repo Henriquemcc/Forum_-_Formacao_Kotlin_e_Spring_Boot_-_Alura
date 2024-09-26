@@ -2,6 +2,7 @@ package io.github.henriquemcc.forum.controller
 
 import io.github.henriquemcc.forum.dto.AtualizarTopicoForm
 import io.github.henriquemcc.forum.dto.NovoTopicoForm
+import io.github.henriquemcc.forum.dto.TopicoPorCategoriaDto
 import io.github.henriquemcc.forum.dto.TopicoView
 import io.github.henriquemcc.forum.service.TopicoService
 import jakarta.transaction.Transactional
@@ -64,5 +65,10 @@ class TopicoController(private val service: TopicoService) {
     @CacheEvict(value = ["topicos"], allEntries = true)
     fun deletar(@PathVariable id: Long) {
         service.deletar(id)
+    }
+
+    @GetMapping("/relatorio")
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return service.relatorio()
     }
 }

@@ -2,6 +2,7 @@ package io.github.henriquemcc.forum.service
 
 import io.github.henriquemcc.forum.dto.AtualizarTopicoForm
 import io.github.henriquemcc.forum.dto.NovoTopicoForm
+import io.github.henriquemcc.forum.dto.TopicoPorCategoriaDto
 import io.github.henriquemcc.forum.dto.TopicoView
 import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.mapper.TopicoFormMapper
@@ -56,5 +57,9 @@ class TopicoService(
 
     fun deletar(id: Long) {
         repository.deleteById(id)
+    }
+
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return repository.relatorio()
     }
 }
