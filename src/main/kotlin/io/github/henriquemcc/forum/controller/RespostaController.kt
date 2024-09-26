@@ -4,6 +4,7 @@ import io.github.henriquemcc.forum.dto.AtualizarRespostaForm
 import io.github.henriquemcc.forum.dto.NovaRespostaForm
 import io.github.henriquemcc.forum.dto.RespostaView
 import io.github.henriquemcc.forum.service.RespostaService
+import jakarta.transaction.Transactional
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -25,6 +26,7 @@ class RespostaController(private val service: RespostaService) {
     }
 
     @PostMapping
+    @Transactional
     fun cadastrar(@RequestBody @Valid form: NovaRespostaForm, @PathVariable idTopico: Long, uriBuilder: UriComponentsBuilder): ResponseEntity<RespostaView> {
         val respostaView = service.cadastrar(form, idTopico)
         val uri = uriBuilder.path("/topicos/${idTopico}/respostas").build().toUri()
@@ -32,6 +34,7 @@ class RespostaController(private val service: RespostaService) {
     }
 
     @PutMapping("/{idResposta}")
+    @Transactional
     fun atualizar(@RequestBody @Valid form: AtualizarRespostaForm, @PathVariable idResposta: Long): ResponseEntity<RespostaView> {
         val respostaView = service.atualizar(form, idResposta)
         return ResponseEntity.ok(respostaView)
@@ -39,6 +42,7 @@ class RespostaController(private val service: RespostaService) {
 
     @DeleteMapping("/{idResposta}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
     fun deletar(@PathVariable idResposta: Long) {
         service.deletar(idResposta)
     }

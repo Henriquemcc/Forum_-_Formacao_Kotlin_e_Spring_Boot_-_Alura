@@ -1,34 +1,34 @@
 package io.github.henriquemcc.forum.service
 
-import io.github.henriquemcc.forum.dto.AtualizarTopicoForm
-import io.github.henriquemcc.forum.dto.NovoTopicoForm
-import io.github.henriquemcc.forum.dto.TopicoView
+import io.github.henriquemcc.forum.dto.*
 import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.mapper.TopicoFormMapper
 import io.github.henriquemcc.forum.mapper.TopicoViewMapper
 import io.github.henriquemcc.forum.model.Topico
+import io.github.henriquemcc.forum.repository.TopicoRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
 class TopicoService(
-    private val topicos: MutableList<Topico> = mutableListOf(),
+    private val repository: TopicoRepository,
     private val topicoViewMapper: TopicoViewMapper,
     private val topicoFormMapper: TopicoFormMapper,
     private val notFoundMessage: String = "Topico nao encontrado!",
 ) {
 
-    fun listarListTopico(): List<Topico> {
-        return topicos
-    }
-
-    fun listarListTopicoView(): List<TopicoView> {
-        return listarListTopico().map { t -> topicoViewMapper.map(t) }
+    fun listar(nomeCurso: String?, paginacao: Pageable): Page<TopicoView> {
+        val topicos = if (nomeCurso == null) {
+            repository.findAll(paginacao)
+        } else {
+            repository.findByCursoNome(nomeCurso, paginacao)
+        }
+        return topicos.map { t -> topicoViewMapper.map(t) }
     }
 
     fun buscarPorIdTopico(id: Long): Topico {
-        return topicos.firstOrNull {
-            t -> t.id == id
-        } ?: throw NotFoundException(notFoundMessage)
+        return repository.findById(id).orElseThrow{NotFoundException(notFoundMessage)}
     }
 
     fun buscarPorIdTopicoView(id: Long): TopicoView {
@@ -36,9 +36,7 @@ class TopicoService(
     }
 
     fun cadastrar(topico: Topico): Topico {
-        if (topico.id == null)
-            topico.id = topicos.size.toLong() + 1
-        topicos.add(topico)
+        repository.save(topico)
         return topico
     }
 
@@ -48,29 +46,21 @@ class TopicoService(
     }
 
     fun atualizar(form: AtualizarTopicoForm): TopicoView {
-        val topicoRemovido = topicos.firstOrNull {
-            it.id == form.id
-        } ?: throw NotFoundException(notFoundMessage)
-        topicos.remove(topicoRemovido)
-        val topicoAtualizado = Topico(
-            id = form.id,
-            titulo = form.titulo,
-            mensagem = form.mensagem,
-            autor = topicoRemovido.autor,
-            curso = topicoRemovido.curso,
-            respostas = topicoRemovido.respostas,
-            status = topicoRemovido.status,
-            dataCriacao = topicoRemovido.dataCriacao
-        )
-        topicos.add(topicoAtualizado)
-
-        return topicoViewMapper.map(topicoAtualizado)
+        val topico = repository.findById(form.id).orElseThrow { NotFoundException(notFoundMessage) }
+        topico.titulo = form.titulo
+        topico.mensagem = form.mensagem
+        return topicoViewMapper.map(topico)
     }
 
     fun deletar(id: Long) {
-        val topico = topicos.firstOrNull {
-            it.id == id
-        } ?: throw NotFoundException(notFoundMessage)
-        topicos.remove(topico)
+        repository.deleteById(id)
+    }
+
+    fun relatorio(): List<TopicoPorCategoriaDto> {
+        return repository.relatorio()
+    }
+
+    fun relatorioTopicosNaoRespondidos(): List<TopicoNaoRespondidoDto> {
+        return repository.relatorioTopicosNaoRespondidos()
     }
 }
