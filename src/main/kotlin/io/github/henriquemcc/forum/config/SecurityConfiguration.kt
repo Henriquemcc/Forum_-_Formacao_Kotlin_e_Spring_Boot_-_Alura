@@ -6,7 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.web.DefaultSecurityFilterChain
+import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
 @EnableWebSecurity
@@ -15,12 +16,12 @@ import org.springframework.security.web.DefaultSecurityFilterChain
 class SecurityConfiguration {
 
     @Bean
-    fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
+    fun encoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
 
     @Bean
-    fun filterChain(http: HttpSecurity): DefaultSecurityFilterChain? {
+    fun filterChain(http: HttpSecurity): SecurityFilterChain? {
 
         // https://spring.io/blog/2019/11/21/spring-security-lambda-dsl
         http.authorizeHttpRequests { authorize ->
