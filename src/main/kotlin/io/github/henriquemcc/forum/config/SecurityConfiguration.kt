@@ -2,6 +2,8 @@ package io.github.henriquemcc.forum.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
+import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -24,17 +26,16 @@ class SecurityConfiguration {
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
 
         // https://spring.io/blog/2019/11/21/spring-security-lambda-dsl
-        http.authorizeHttpRequests { authorize ->
-            authorize.anyRequest().authenticated()
-        }
-        http.sessionManagement { session ->
-            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        }
-        http.formLogin { form ->
-            form.disable().httpBasic {}
-        }
-
-        return http.build()
+        return http.
+        csrf {it.disable ()}.
+        authorizeHttpRequests {
+            it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_E_ESCRITA").
+            anyRequest().authenticated()
+        }.
+        sessionManagement {
+            it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        }.
+        httpBasic(Customizer.withDefaults()).build()
     }
 
 }
