@@ -29,7 +29,7 @@ class SecurityConfiguration {
         return http.
         csrf {it.disable ()}.
         authorizeHttpRequests {
-            it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_E_ESCRITA").
+            it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_ESCRITA").
             anyRequest().authenticated()
         }.
         sessionManagement {
