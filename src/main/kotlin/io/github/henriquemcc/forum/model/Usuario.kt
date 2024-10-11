@@ -12,6 +12,6 @@ data class Usuario(
     val password: String,
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "usuario_role")
+    @JoinTable(name = "usuario_role", joinColumns = [JoinColumn(name = "usuario_id")], inverseJoinColumns = [JoinColumn(name = "role_id")])
     val role: List<Role> = mutableListOf()
 )
