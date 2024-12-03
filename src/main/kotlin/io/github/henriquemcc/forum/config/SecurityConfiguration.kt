@@ -29,8 +29,8 @@ class SecurityConfiguration {
         return http.
         csrf {it.disable ()}.
         authorizeHttpRequests {
-            it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_ESCRITA").
-            anyRequest().authenticated()
+            //it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_ESCRITA").anyRequest().authenticated()
+            it.requestMatchers(HttpMethod.POST, "/login").permitAll()
         }.
         sessionManagement {
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
