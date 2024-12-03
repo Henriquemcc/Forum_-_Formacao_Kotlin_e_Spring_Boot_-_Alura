@@ -7,6 +7,7 @@ import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
@@ -15,7 +16,12 @@ import org.springframework.security.web.SecurityFilterChain
 @EnableWebSecurity
 // https://cursos.alura.com.br/forum/topico-websecurityconfigureradapter-deprecated-nova-implementacao-226360
 // https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
-class SecurityConfiguration {
+class SecurityConfiguration(
+    private val userDetailsService: UserDetailsService,
+    private val jwtUtil: JWTUtil
+) {
+
+
 
     @Bean
     fun encoder(): PasswordEncoder {
@@ -32,6 +38,7 @@ class SecurityConfiguration {
             //it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_ESCRITA").anyRequest().authenticated()
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
         }.
+        addFilterBefore(JWTLoginFilter(authManager = authenticationManager(), jwtUtil = jwtUtil), UsernamePasswordAuthenticationFilter().javaClass).
         sessionManagement {
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         }.
