@@ -4,9 +4,6 @@ import io.github.henriquemcc.forum.security.JWTLoginFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.Customizer
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -30,7 +27,6 @@ class SecurityConfiguration(
 ) {
 
 
-
     @Bean
     fun encoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
@@ -40,12 +36,17 @@ class SecurityConfiguration(
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
 
         // https://spring.io/blog/2019/11/21/spring-security-lambda-dsl
-        http.csrf {it.disable ()}
+        http.csrf { it.disable() }
         http.authorizeHttpRequests {
             //it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_ESCRITA").anyRequest().authenticated()
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
         }
-        http.addFilterBefore(JWTLoginFilter(authManager = authenticationConfiguration.authenticationManager, jwtUtil = jwtUtil), UsernamePasswordAuthenticationFilter().javaClass)
+        http.addFilterBefore(
+            JWTLoginFilter(
+                authManager = authenticationConfiguration.authenticationManager,
+                jwtUtil = jwtUtil
+            ), UsernamePasswordAuthenticationFilter().javaClass
+        )
         http.sessionManagement {
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         }

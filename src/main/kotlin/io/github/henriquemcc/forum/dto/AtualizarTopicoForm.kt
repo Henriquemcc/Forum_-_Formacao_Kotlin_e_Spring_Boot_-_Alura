@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size
 
 data class AtualizarTopicoForm(
     @field:NotNull
-    val id:Long,
+    val id: Long,
 
     @field:NotEmpty
     @field:Size(min = 5, max = 100)
