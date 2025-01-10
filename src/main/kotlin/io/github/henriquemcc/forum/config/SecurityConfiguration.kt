@@ -1,5 +1,6 @@
 package io.github.henriquemcc.forum.config
 
+import io.github.henriquemcc.forum.security.JWTAuthenticationFilter
 import io.github.henriquemcc.forum.security.JWTLoginFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.filter.OncePerRequestFilter
 
 
 @Configuration
@@ -46,6 +48,10 @@ class SecurityConfiguration(
                 authManager = authenticationConfiguration.authenticationManager,
                 jwtUtil = jwtUtil
             ), UsernamePasswordAuthenticationFilter().javaClass
+        )
+        http.addFilterBefore(
+            JWTAuthenticationFilter(jwtUtil = jwtUtil),
+            OncePerRequestFilter::class.java
         )
         http.sessionManagement {
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
