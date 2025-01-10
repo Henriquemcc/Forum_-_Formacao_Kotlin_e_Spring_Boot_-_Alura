@@ -16,14 +16,14 @@ class JWTLoginFilter(
     private val authManager: AuthenticationManager,
     private val jwtUtil: JWTUtil) : UsernamePasswordAuthenticationFilter() {
 
-    override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication {
+    override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse?): Authentication {
         val (username, password) = ObjectMapper().readValue(request.inputStream, Credentials::class.java)
         val token = UsernamePasswordAuthenticationToken(username, password)
         return authManager.authenticate(token)
     }
 
     override fun successfulAuthentication(
-        request: HttpServletRequest,
+        request: HttpServletRequest?,
         response: HttpServletResponse,
         chain: FilterChain?,
         authResult: Authentication
