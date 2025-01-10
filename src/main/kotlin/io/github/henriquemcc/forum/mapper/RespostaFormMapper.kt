@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component
 class RespostaFormMapper(
     val usuarioService: UsuarioService,
     val topicoService: TopicoService,
-): Mapper<NovaRespostaForm, Resposta> {
+) : Mapper<NovaRespostaForm, Resposta> {
 
     override fun map(t: NovaRespostaForm): Resposta {
         return Resposta(
             mensagem = t.mensagem,
             autor = usuarioService.buscarPorId(t.idAutor),
             solucao = false
-            )
+        )
     }
 }

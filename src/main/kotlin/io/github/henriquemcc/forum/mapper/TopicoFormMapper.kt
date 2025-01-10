@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 class TopicoFormMapper(
     private val cursoService: CursoService,
     private val usuarioService: UsuarioService,
-): Mapper<NovoTopicoForm, Topico> {
+) : Mapper<NovoTopicoForm, Topico> {
 
     override fun map(t: NovoTopicoForm): Topico {
         return Topico(

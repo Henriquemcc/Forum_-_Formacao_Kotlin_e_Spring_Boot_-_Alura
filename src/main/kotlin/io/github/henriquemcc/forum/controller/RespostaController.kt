@@ -27,7 +27,11 @@ class RespostaController(private val service: RespostaService) {
 
     @PostMapping
     @Transactional
-    fun cadastrar(@RequestBody @Valid form: NovaRespostaForm, @PathVariable idTopico: Long, uriBuilder: UriComponentsBuilder): ResponseEntity<RespostaView> {
+    fun cadastrar(
+        @RequestBody @Valid form: NovaRespostaForm,
+        @PathVariable idTopico: Long,
+        uriBuilder: UriComponentsBuilder
+    ): ResponseEntity<RespostaView> {
         val respostaView = service.cadastrar(form, idTopico)
         val uri = uriBuilder.path("/topicos/${idTopico}/respostas").build().toUri()
         return ResponseEntity.created(uri).body(respostaView)
@@ -35,7 +39,10 @@ class RespostaController(private val service: RespostaService) {
 
     @PutMapping("/{idResposta}")
     @Transactional
-    fun atualizar(@RequestBody @Valid form: AtualizarRespostaForm, @PathVariable idResposta: Long): ResponseEntity<RespostaView> {
+    fun atualizar(
+        @RequestBody @Valid form: AtualizarRespostaForm,
+        @PathVariable idResposta: Long
+    ): ResponseEntity<RespostaView> {
         val respostaView = service.atualizar(form, idResposta)
         return ResponseEntity.ok(respostaView)
     }

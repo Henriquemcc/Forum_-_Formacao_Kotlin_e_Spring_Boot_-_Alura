@@ -14,7 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 class JWTLoginFilter(
     private val authManager: AuthenticationManager,
-    private val jwtUtil: JWTUtil) : UsernamePasswordAuthenticationFilter() {
+    private val jwtUtil: JWTUtil
+) : UsernamePasswordAuthenticationFilter() {
 
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse?): Authentication {
         val (username, password) = ObjectMapper().readValue(request.inputStream, Credentials::class.java)

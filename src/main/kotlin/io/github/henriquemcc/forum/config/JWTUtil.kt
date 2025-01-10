@@ -2,7 +2,6 @@ package io.github.henriquemcc.forum.config
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.Jwts.SIG
-import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys.hmacShaKeyFor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -17,10 +16,7 @@ class JWTUtil {
     private lateinit var secret: String
 
     fun generateToken(username: String): String? {
-        return Jwts.builder().
-        subject(username).
-        expiration(Date(System.currentTimeMillis() + expiration)).
-        signWith(hmacShaKeyFor(secret.toByteArray()), SIG.HS512).
-        compact()
+        return Jwts.builder().subject(username).expiration(Date(System.currentTimeMillis() + expiration))
+            .signWith(hmacShaKeyFor(secret.toByteArray()), SIG.HS512).compact()
     }
 }

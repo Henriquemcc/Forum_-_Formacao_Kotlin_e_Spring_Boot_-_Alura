@@ -20,7 +20,7 @@ class RespostaService(
 ) {
 
     fun listarPorIdTopicoListResposta(idTopico: Long): List<Resposta> {
-        return repository.findAll().filter { r-> r.topico == topicoService.buscarPorIdTopico(idTopico) }
+        return repository.findAll().filter { r -> r.topico == topicoService.buscarPorIdTopico(idTopico) }
     }
 
     fun listarPorIdTopicoListRespostaView(idTopico: Long): List<RespostaView> {
@@ -28,7 +28,8 @@ class RespostaService(
     }
 
     fun buscarPorIdResposta(idTopico: Long, idResposta: Long): Resposta {
-        return repository.findAll().first { r -> (r.topico == topicoService.buscarPorIdTopico(idTopico) && r.id == idResposta) }
+        return repository.findAll()
+            .first { r -> (r.topico == topicoService.buscarPorIdTopico(idTopico) && r.id == idResposta) }
     }
 
     fun buscarPorIdRespostaView(idTopico: Long, idResposta: Long): RespostaView {
@@ -48,7 +49,7 @@ class RespostaService(
     }
 
     fun atualizar(form: AtualizarRespostaForm, idResposta: Long): RespostaView? {
-        val resposta = repository.findById(idResposta).orElseThrow{NotFoundException(notFoundMessage)}
+        val resposta = repository.findById(idResposta).orElseThrow { NotFoundException(notFoundMessage) }
         resposta.mensagem = form.mensagem
         return respostaViewMapper.map(resposta)
     }

@@ -28,7 +28,7 @@ class TopicoService(
     }
 
     fun buscarPorIdTopico(id: Long): Topico {
-        return repository.findById(id).orElseThrow{NotFoundException(notFoundMessage)}
+        return repository.findById(id).orElseThrow { NotFoundException(notFoundMessage) }
     }
 
     fun buscarPorIdTopicoView(id: Long): TopicoView {
