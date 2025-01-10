@@ -49,7 +49,6 @@ class SecurityConfiguration(
         http.sessionManagement {
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         }
-        http.httpBasic(Customizer.withDefaults())
         return http.build()
 
     }
