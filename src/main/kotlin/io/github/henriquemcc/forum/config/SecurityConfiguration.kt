@@ -47,11 +47,11 @@ class SecurityConfiguration(
             JWTLoginFilter(
                 authManager = authenticationConfiguration.authenticationManager,
                 jwtUtil = jwtUtil
-            ), UsernamePasswordAuthenticationFilter().javaClass
+            ), UsernamePasswordAuthenticationFilter::class.java
         )
         http.addFilterBefore(
             JWTAuthenticationFilter(jwtUtil = jwtUtil),
-            OncePerRequestFilter::class.java
+            UsernamePasswordAuthenticationFilter::class.java
         )
         http.sessionManagement {
             it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
