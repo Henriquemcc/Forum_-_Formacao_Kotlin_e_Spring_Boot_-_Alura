@@ -1,11 +1,45 @@
 {
 	"info": {
 		"_postman_id": "3d9abb5d-cfd1-4711-982f-5201b3b1671c",
-		"name": "API REST com Kotlin e Spring Boot: Camada Web",
+		"name": "API REST com Kotlin e Spring Boot",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21485404"
 	},
 	"item": [
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"ana@email.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "POST Tópico",
 			"request": {
@@ -289,19 +323,7 @@
 		}
 	],
 	"auth": {
-		"type": "basic",
-		"basic": [
-			{
-				"key": "password",
-				"value": "123456",
-				"type": "string"
-			},
-			{
-				"key": "username",
-				"value": "ana@email.com",
-				"type": "string"
-			}
-		]
+		"type": "inherit"
 	},
 	"event": [
 		{
