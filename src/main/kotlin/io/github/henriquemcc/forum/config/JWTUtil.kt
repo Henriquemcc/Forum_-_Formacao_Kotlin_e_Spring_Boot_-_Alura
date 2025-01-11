@@ -11,7 +11,7 @@ import java.util.*
 @Component
 class JWTUtil {
 
-    private val expiration: Long = 60000
+    private val expiration: Long = 86400000
 
     @Value("\${jwt.secret}")
     private lateinit var secret: String
