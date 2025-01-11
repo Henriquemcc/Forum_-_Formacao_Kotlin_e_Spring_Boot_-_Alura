@@ -42,6 +42,7 @@ class SecurityConfiguration(
         http.authorizeHttpRequests {
             //it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_ESCRITA").anyRequest().authenticated()
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
+            it.anyRequest().authenticated()
         }
         http.addFilterBefore(
             JWTLoginFilter(
