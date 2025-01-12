@@ -1,6 +1,7 @@
 package io.github.henriquemcc.forum.controller
 
 import io.github.henriquemcc.forum.dto.*
+import io.github.henriquemcc.forum.service.TopicoDtoService
 import io.github.henriquemcc.forum.service.TopicoService
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
@@ -17,7 +18,10 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/topicos")
-class TopicoController(private val service: TopicoService) {
+class TopicoController(
+    private val topicoService: TopicoService,
+    private val topicoDtoService: TopicoDtoService
+) {
 
     @GetMapping
     @Cacheable("topicos")
@@ -25,12 +29,12 @@ class TopicoController(private val service: TopicoService) {
         @RequestParam(required = false) nomeCurso: String?,
         @PageableDefault(size = 5, sort = ["dataCriacao"], direction = Sort.Direction.DESC) paginacao: Pageable
     ): Page<TopicoView> {
-        return service.listar(nomeCurso, paginacao)
+        return topicoDtoService.listar(nomeCurso, paginacao)
     }
 
     @GetMapping("/{id}")
     fun buscarPorId(@PathVariable id: Long): TopicoView {
-        return service.buscarPorIdTopicoView(id)
+        return topicoDtoService.buscarPorId(id)
     }
 
     @PostMapping
@@ -40,16 +44,16 @@ class TopicoController(private val service: TopicoService) {
         @RequestBody @Valid form: NovoTopicoForm,
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<TopicoView> {
-        val topicoView = service.cadastrar(form)
+        val topicoView = topicoDtoService.cadastrar(form)
         val uri = uriBuilder.path("/topicos/").build().toUri()
         return ResponseEntity.created(uri).body(topicoView)
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @Transactional
     @CacheEvict(value = ["topicos"], allEntries = true)
-    fun atualizar(@RequestBody @Valid form: AtualizarTopicoForm): ResponseEntity<TopicoView> {
-        val topicoView = service.atualizar(form)
+    fun atualizar(@RequestBody @Valid form: AtualizarTopicoForm, @PathVariable id: Long): ResponseEntity<TopicoView> {
+        val topicoView = topicoDtoService.atualizar(form, id)
         return ResponseEntity.ok(topicoView)
     }
 
@@ -58,16 +62,16 @@ class TopicoController(private val service: TopicoService) {
     @Transactional
     @CacheEvict(value = ["topicos"], allEntries = true)
     fun deletar(@PathVariable id: Long) {
-        service.deletar(id)
+        topicoService.deletar(id)
     }
 
     @GetMapping("/relatorio")
     fun relatorio(): List<TopicoPorCategoriaDto> {
-        return service.relatorio()
+        return topicoService.relatorio()
     }
 
     @GetMapping("/relatorioTopicosNaoRespondidos")
     fun relatorioTopicosNaoRespondidos(): List<TopicoNaoRespondidoDto> {
-        return service.relatorioTopicosNaoRespondidos()
+        return topicoService.relatorioTopicosNaoRespondidos()
     }
 }
