@@ -135,14 +135,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/topicos",
+							"raw": "http://localhost:8080/topicos/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"topicos"
+								"topicos",
+								"1"
 							]
 						}
 					},
