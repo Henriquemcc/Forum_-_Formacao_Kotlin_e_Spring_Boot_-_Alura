@@ -13,10 +13,10 @@ data class Resposta(
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
 
     @ManyToOne
-    val autor: Usuario,
+    val autor: Usuario? = null,
 
     @ManyToOne
     var topico: Topico? = null,
 
-    val solucao: Boolean,
+    val solucao: Boolean? = null,
 )
