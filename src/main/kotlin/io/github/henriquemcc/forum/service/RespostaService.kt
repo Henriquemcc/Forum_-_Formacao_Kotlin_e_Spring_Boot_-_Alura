@@ -20,7 +20,7 @@ class RespostaService(
 ) {
 
     fun listarPorIdTopicoListResposta(idTopico: Long): List<Resposta> {
-        return repository.findAll().filter { r -> r.topico == topicoService.buscarPorIdTopico(idTopico) }
+        return repository.findAll().filter { r -> r.topico == topicoService.buscarPorId(idTopico) }
     }
 
     fun listarPorIdTopicoListRespostaView(idTopico: Long): List<RespostaView> {
@@ -29,7 +29,7 @@ class RespostaService(
 
     fun buscarPorIdResposta(idTopico: Long, idResposta: Long): Resposta {
         return repository.findAll()
-            .first { r -> (r.topico == topicoService.buscarPorIdTopico(idTopico) && r.id == idResposta) }
+            .first { r -> (r.topico == topicoService.buscarPorId(idTopico) && r.id == idResposta) }
     }
 
     fun buscarPorIdRespostaView(idTopico: Long, idResposta: Long): RespostaView {
@@ -38,7 +38,7 @@ class RespostaService(
 
     fun cadastrar(form: NovaRespostaForm, idTopico: Long): RespostaView {
         val resposta = respostaFormMapper.map(form)
-        resposta.topico = topicoService.buscarPorIdTopico(idTopico)
+        resposta.topico = topicoService.buscarPorId(idTopico)
         val respostaCadastrada = cadastrar(resposta)
         return respostaViewMapper.map(respostaCadastrada)
     }
