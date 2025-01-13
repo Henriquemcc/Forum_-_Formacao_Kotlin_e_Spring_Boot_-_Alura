@@ -40,7 +40,7 @@ class SecurityConfiguration(
         // https://spring.io/blog/2019/11/21/spring-security-lambda-dsl
         http.csrf { it.disable() }
         http.authorizeHttpRequests {
-            //it.requestMatchers(HttpMethod.GET, "/topicos").hasAuthority("LEITURA_ESCRITA").anyRequest().authenticated()
+            it.requestMatchers("/topicos").hasAuthority("LEITURA_ESCRITA")
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
             it.anyRequest().authenticated()
         }

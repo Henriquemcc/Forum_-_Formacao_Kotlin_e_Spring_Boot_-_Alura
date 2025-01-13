@@ -1,5 +1,7 @@
 package io.github.henriquemcc.forum.config
 
+import io.github.henriquemcc.forum.model.Role
+import io.github.henriquemcc.forum.service.UsuarioService
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.Jwts.SIG
 import io.jsonwebtoken.security.Keys.hmacShaKeyFor
@@ -9,15 +11,17 @@ import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-class JWTUtil {
+class JWTUtil(
+    private val usuarioService: UsuarioService
+) {
 
     private val expiration: Long = 86400000
 
     @Value("\${jwt.secret}")
     private lateinit var secret: String
 
-    fun generateToken(username: String): String? {
-        return Jwts.builder().subject(username).expiration(Date(System.currentTimeMillis() + expiration))
+    fun generateToken(username: String, authorities: List<Role>): String? {
+        return Jwts.builder().subject(username).claim("role", authorities).expiration(Date(System.currentTimeMillis() + expiration))
             .signWith(hmacShaKeyFor(secret.toByteArray()), SIG.HS512).compact()
     }
 
@@ -33,8 +37,9 @@ class JWTUtil {
 
     // https://cursos.alura.com.br/forum/topico-sobre-o-metodo-isvalid-e-getauthentication-441882
     fun getAuthentication(jwt: String?): UsernamePasswordAuthenticationToken {
-        val username = Jwts.parser().verifyWith(hmacShaKeyFor(secret.toByteArray())).build().parseSignedClaims(jwt)
-        return UsernamePasswordAuthenticationToken(username, null, null)
+        val username = Jwts.parser().verifyWith(hmacShaKeyFor(secret.toByteArray())).build().parseSignedClaims(jwt).payload.subject
+        val user = usuarioService.loadUserByUsername(username)
+        return UsernamePasswordAuthenticationToken(username, null, user.authorities)
     }
 
 
