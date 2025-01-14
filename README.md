@@ -23,3 +23,15 @@ Os cursos em que estes arquivos foram desenvolvidos:
 [<img src="https://www.alura.com.br/assets/api/cursos/api-rest-kotlin-spring-boot-camada-persistencia.svg" width="16px" height="16px"> API REST com Kotlin e Spring Boot: Camada de persistência](https://cursos.alura.com.br/course/api-rest-kotlin-spring-boot-camada-persistencia).
 
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-seguranca-infraestrutura.svg" width="16px" height="16px"> Kotlin e Spring: segurança e infraestrutura](https://cursos.alura.com.br/course/kotlin-spring-seguranca-infraestrutura).
+
+## Sites Externos
+
+Os sites externos acessados durante esses cursos foram:
+
+https://start.spring.io
+
+https://mvnrepository.com
+
+https://bcrypt-generator.com
+
+https://jwt.io
