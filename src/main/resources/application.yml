@@ -1,2 +1,4 @@
-profiles:
-  active: @activatedProperties@
+# https://stackoverflow.com/questions/53117490/spring-profile-is-ignored-when-reading-properties-from-application-yml
+spring:
+  profiles:
+    active: @activatedProperties@
