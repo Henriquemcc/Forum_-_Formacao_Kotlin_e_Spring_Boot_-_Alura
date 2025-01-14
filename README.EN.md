@@ -61,3 +61,37 @@ mvnw spring-boot:run
 ## How to Test
 
 To test the operation of this program, install [Postman](https://www.postman.com/) and import the [Postman Collection](postman_collection.json), and perform the desired requests.
+
+## Docker Container
+
+### Building the Container
+
+To build the docker container, in the project folder open a terminal (or Command Prompt) and type the following command:
+
+In Linux or Mac Terminal:
+
+```
+./build-container.bash
+```
+
+In Windows Command Prompt:
+
+```
+build-container.bat
+```
+
+In PowerShell:
+
+```
+.\build-container.ps1
+```
+
+### Execute the Container
+
+To execute the docker container, after have built the container, open a terminal (or command prompt) and type the following command:
+
+```
+docker run -p 3080:8080 forum
+```
+
+And the program will execute in the port 3080.
