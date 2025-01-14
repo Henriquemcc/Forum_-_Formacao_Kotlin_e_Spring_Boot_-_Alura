@@ -20,12 +20,18 @@ class JWTUtil(
     @Value("\${jwt.secret}")
     private lateinit var secret: String
 
+    /**
+     * Realiza a geração do token JWT.
+     */
     fun generateToken(username: String, authorities: List<Role>): String? {
         return Jwts.builder().subject(username).claim("role", authorities).expiration(Date(System.currentTimeMillis() + expiration))
             .signWith(hmacShaKeyFor(secret.toByteArray()), SIG.HS512).compact()
     }
 
     // https://cursos.alura.com.br/forum/topico-sobre-o-metodo-isvalid-e-getauthentication-441882
+    /**
+     * Verifica se um token JWT é válido.
+     */
     fun isValid(jwt: String?): Boolean {
         return try {
             Jwts.parser().verifyWith(hmacShaKeyFor(secret.toByteArray())).build().parseSignedClaims(jwt)
@@ -36,6 +42,9 @@ class JWTUtil(
     }
 
     // https://cursos.alura.com.br/forum/topico-sobre-o-metodo-isvalid-e-getauthentication-441882
+    /**
+     * Obtém a autenticação do usuário.
+     */
     fun getAuthentication(jwt: String?): UsernamePasswordAuthenticationToken {
         val username = Jwts.parser().verifyWith(hmacShaKeyFor(secret.toByteArray())).build().parseSignedClaims(jwt).payload.subject
         val user = usuarioService.loadUserByUsername(username)

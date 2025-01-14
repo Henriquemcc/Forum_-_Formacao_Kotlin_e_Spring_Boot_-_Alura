@@ -7,7 +7,14 @@ import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
 
+/**
+ * Fíltro utilizado para validar o token de acesso das requisições.
+ */
 class JWTAuthenticationFilter(private val jwtUtil: JWTUtil) : OncePerRequestFilter() {
+
+    /**
+     * Realiza a execução do filtro.
+     */
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
@@ -22,6 +29,9 @@ class JWTAuthenticationFilter(private val jwtUtil: JWTUtil) : OncePerRequestFilt
         filterChain.doFilter(request, response)
     }
 
+    /**
+     * Extraí o token de autenticação da string passada por parâmetro.
+     */
     private fun getTokenDetail(token: String?): String? {
         return token?.let { jwt ->
             jwt.startsWith("Bearer ")
