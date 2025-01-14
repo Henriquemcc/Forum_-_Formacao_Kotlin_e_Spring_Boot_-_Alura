@@ -35,3 +35,29 @@ https://mvnrepository.com
 https://bcrypt-generator.com
 
 https://jwt.io
+
+## Requisitos
+
+Para compilar e executar este programa é necessário ter instalado os seguintes programas:
+
+- [Java JDK 21](https://www.oracle.com/java/technologies/downloads/#java21)
+
+## Como executar
+
+Para executar este programa, na pasta do projeto abra um terminal (ou prompt de comando) e digite o seguinte comando:
+
+No Terminal do Linux e Mac:
+
+```
+./mvnw spring-boot:run
+```
+
+No Prompt de Comando, Terminal ou PowerShell do Windows:
+
+```
+mvnw spring-boot:run
+```
+
+## Como testar
+
+Para testar o funcionamento deste programa, instale o [Postman](https://www.postman.com/) e importe a [Postman Collection](postman_collection.json), e realize as requisições desejadas.
