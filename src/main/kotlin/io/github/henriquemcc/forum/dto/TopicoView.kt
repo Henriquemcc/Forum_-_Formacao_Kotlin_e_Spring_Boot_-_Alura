@@ -3,7 +3,7 @@ package io.github.henriquemcc.forum.dto
 import io.github.henriquemcc.forum.model.StatusTopico
 import java.time.LocalDateTime
 
-class TopicoView (
+class TopicoView(
     val id: Long?,
     val titulo: String,
     val mensagem: String,

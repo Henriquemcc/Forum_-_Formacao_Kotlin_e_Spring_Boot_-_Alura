@@ -3,6 +3,7 @@ package io.github.henriquemcc.forum.controller
 import io.github.henriquemcc.forum.dto.AtualizarRespostaForm
 import io.github.henriquemcc.forum.dto.NovaRespostaForm
 import io.github.henriquemcc.forum.dto.RespostaView
+import io.github.henriquemcc.forum.service.RespostaDtoService
 import io.github.henriquemcc.forum.service.RespostaService
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
@@ -13,30 +14,37 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/topicos/{idTopico}/respostas")
-class RespostaController(private val service: RespostaService) {
+class RespostaController(private val respostaDtoService: RespostaDtoService) {
 
     @GetMapping
     fun listarPorIdTopico(@PathVariable idTopico: Long): List<RespostaView> {
-        return service.listarPorIdTopicoListRespostaView(idTopico)
+        return respostaDtoService.listarPorIdTopico(idTopico)
     }
 
     @GetMapping("/{idResposta}")
     fun buscarPorIdResposta(@PathVariable idTopico: Long, @PathVariable idResposta: Long): RespostaView {
-        return service.buscarPorIdRespostaView(idTopico, idResposta)
+        return respostaDtoService.buscarPorId(idTopico, idResposta)
     }
 
     @PostMapping
     @Transactional
-    fun cadastrar(@RequestBody @Valid form: NovaRespostaForm, @PathVariable idTopico: Long, uriBuilder: UriComponentsBuilder): ResponseEntity<RespostaView> {
-        val respostaView = service.cadastrar(form, idTopico)
+    fun cadastrar(
+        @RequestBody @Valid form: NovaRespostaForm,
+        @PathVariable idTopico: Long,
+        uriBuilder: UriComponentsBuilder
+    ): ResponseEntity<RespostaView> {
+        val respostaView = respostaDtoService.cadastrar(form, idTopico)
         val uri = uriBuilder.path("/topicos/${idTopico}/respostas").build().toUri()
         return ResponseEntity.created(uri).body(respostaView)
     }
 
     @PutMapping("/{idResposta}")
     @Transactional
-    fun atualizar(@RequestBody @Valid form: AtualizarRespostaForm, @PathVariable idResposta: Long): ResponseEntity<RespostaView> {
-        val respostaView = service.atualizar(form, idResposta)
+    fun atualizar(
+        @RequestBody @Valid form: AtualizarRespostaForm,
+        @PathVariable idResposta: Long
+    ): ResponseEntity<RespostaView> {
+        val respostaView = respostaDtoService.atualizar(form, idResposta)
         return ResponseEntity.ok(respostaView)
     }
 
@@ -44,6 +52,6 @@ class RespostaController(private val service: RespostaService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deletar(@PathVariable idResposta: Long) {
-        service.deletar(idResposta)
+        respostaDtoService.deletar(idResposta)
     }
 }
