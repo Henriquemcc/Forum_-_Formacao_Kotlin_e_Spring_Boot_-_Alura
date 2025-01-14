@@ -42,22 +42,22 @@ Para compilar e executar este programa é necessário ter instalado os seguintes
 
 - [Java JDK 21](https://www.oracle.com/java/technologies/downloads/#java21)
 
-## Como executar
+## Como Executar
 
 Para executar este programa, na pasta do projeto abra um terminal (ou prompt de comando) e digite o seguinte comando:
 
-No Terminal do Linux e Mac:
+No Terminal do Linux e Mac, ou no PowerShell do Windows:
 
 ```
 ./mvnw spring-boot:run
 ```
 
-No Prompt de Comando, Terminal ou PowerShell do Windows:
+No Prompt de Comando do Windows:
 
 ```
 mvnw spring-boot:run
 ```
 
-## Como testar
+## Como Testar
 
 Para testar o funcionamento deste programa, instale o [Postman](https://www.postman.com/) e importe a [Postman Collection](postman_collection.json), e realize as requisições desejadas.
