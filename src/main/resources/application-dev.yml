@@ -1,4 +1,7 @@
 spring:
+  docker:
+    compose:
+      file: docker-compose.dev.yml
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/forum
@@ -12,6 +15,3 @@ spring:
         format_sql: true
 jwt:
   secret: dpHA5A$z7ClCoaM%3DT4zfZzEZ0rf4TPY0mNTgj%GP5NXDwTVB#i5HYxSeejmIpw*MOO9^t&a9PhV1wJT*MdifGT*dCkL1Miala6zs2W#V2xBaU9@s1*TRUHRZxflaG3
-docker:
-  compose:
-    file: docker-compose.dev.yml
