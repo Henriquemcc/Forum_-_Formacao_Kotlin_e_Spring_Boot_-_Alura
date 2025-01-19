@@ -8,7 +8,7 @@ spring:
     username: 'myuser'
     password: 'secret'
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     properties:
       hibernate:
         show_sql: true
