@@ -6,5 +6,5 @@ class RespostaView(
     val id: Long,
     val mensagem: String,
     val dataCriacao: LocalDateTime,
-    val solucao: Boolean,
+    val solucao: Boolean?,
 )

@@ -45,8 +45,8 @@ class ExceptionHandler {
         request: HttpServletRequest
     ): ErrorView {
         val errorMessage = HashMap<String, String>()
-        exception.bindingResult.fieldErrors.forEach {
-            e -> errorMessage.put(e.field, e.defaultMessage ?: "")
+        exception.bindingResult.fieldErrors.forEach { e ->
+            errorMessage.put(e.field, e.defaultMessage ?: "")
         }
         return ErrorView(
             status = HttpStatus.BAD_REQUEST.value(),

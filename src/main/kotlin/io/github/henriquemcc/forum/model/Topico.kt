@@ -14,10 +14,10 @@ data class Topico(
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
 
     @ManyToOne
-    val curso: Curso,
+    val curso: Curso? = null,
 
     @ManyToOne
-    val autor: Usuario,
+    val autor: Usuario? = null,
 
     @Enumerated(value = EnumType.STRING)
     val status: StatusTopico = StatusTopico.NAO_RESPONDIDO,
