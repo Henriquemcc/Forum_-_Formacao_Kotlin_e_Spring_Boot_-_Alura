@@ -22,6 +22,7 @@ class TopicoDtoServiceTest {
     private val paginacao: Pageable = mockk()
     private val topicoRepository: TopicoRepository = mockk {
         every { findByCursoNome(any(), any()) } returns topicos
+        every { findAll(paginacao) } returns topicos
     }
     private val topicoViewMapper: TopicoViewMapper = mockk {
         every { map(any()) } returns TopicoViewTest.build()
@@ -37,5 +38,13 @@ class TopicoDtoServiceTest {
         verify(exactly = 1) { topicoRepository.findByCursoNome(any(), any()) }
         verify(exactly = 1) { topicoViewMapper.map(any()) }
         verify(exactly = 0) { topicoRepository.findAll() }
+    }
+
+    @Test
+    fun `deve listar todos os topicos quando nome do curso for nulo`() {
+        topicoDtoService.listar(null, paginacao)
+        verify(exactly = 0) { topicoRepository.findByCursoNome(any(), any()) }
+        verify(exactly = 1) { topicoViewMapper.map(any()) }
+        verify(exactly = 1) { topicoRepository.findAll(paginacao) }
     }
 }
