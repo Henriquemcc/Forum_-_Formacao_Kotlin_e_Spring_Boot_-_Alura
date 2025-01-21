@@ -31,6 +31,7 @@
         <kotlin.version>1.9.24</kotlin.version>
         <testcontainers.version>1.19.8</testcontainers.version>
         <springboot.version>3.3.2</springboot.version>
+        <flywaydb.version>10.10.0</flywaydb.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -103,14 +104,14 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>10.10.0</version>
+            <version>${flywaydb.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-mysql -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-mysql</artifactId>
-            <version>10.10.0</version>
+            <version>${flywaydb.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
