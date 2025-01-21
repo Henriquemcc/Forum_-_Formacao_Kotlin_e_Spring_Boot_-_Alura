@@ -32,6 +32,7 @@
         <testcontainers.version>1.19.8</testcontainers.version>
         <springboot.version>3.3.2</springboot.version>
         <flywaydb.version>10.10.0</flywaydb.version>
+        <jsonwebtoken.version>0.12.6</jsonwebtoken.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -126,14 +127,14 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
-            <version>0.12.6</version>
+            <version>${jsonwebtoken.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
-            <version>0.12.6</version>
+            <version>${jsonwebtoken.version}</version>
             <scope>runtime</scope>
         </dependency>
 
@@ -141,7 +142,7 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-gson</artifactId>
-            <version>0.12.6</version>
+            <version>${jsonwebtoken.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-docker-compose -->
