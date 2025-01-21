@@ -30,6 +30,7 @@
         <java.version>21</java.version>
         <kotlin.version>1.9.24</kotlin.version>
         <testcontainers.version>1.19.8</testcontainers.version>
+        <springboot.version>3.3.2</springboot.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -46,12 +47,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -74,13 +75,13 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -91,12 +92,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
 
         <dependency>
@@ -116,7 +117,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
 
         <!-- https://cursos.alura.com.br/forum/topico-dependencias-para-fazer-a-aplicacao-subir-com-a-nova-versao-do-jwt-441883 -->
@@ -148,7 +149,7 @@
             <artifactId>spring-boot-docker-compose</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
@@ -164,7 +165,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-testcontainers</artifactId>
             <scope>test</scope>
-            <version>3.3.2</version>
+            <version>${springboot.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter -->
