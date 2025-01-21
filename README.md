@@ -40,6 +40,8 @@ https://bcrypt-generator.com
 
 https://jwt.io
 
+https://java.testcontainers.org/
+
 ## Requisitos
 
 Para compilar e executar este programa é necessário ter instalado os seguintes programas:
