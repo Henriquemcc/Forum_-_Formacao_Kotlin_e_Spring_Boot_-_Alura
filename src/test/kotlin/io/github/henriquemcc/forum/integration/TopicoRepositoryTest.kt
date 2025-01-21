@@ -8,6 +8,7 @@ import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.data.domain.PageRequest
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.MySQLContainer
@@ -54,5 +55,12 @@ class TopicoRepositoryTest {
         val relatorio = topicoRepository.relatorio()
         assertThat(relatorio).isNotNull
         assertThat(relatorio.first()).isExactlyInstanceOf(TopicoPorCategoriaDto::class.java)
+    }
+
+    @Test
+    fun `deve listar topico pelo nome do curso`() {
+        topicoRepository.save(topico)
+        val topico = topicoRepository.findByCursoNome(topico.curso?.nome!!, PageRequest.of(0, 5))
+        assertThat(topico).isNotNull
     }
 }
