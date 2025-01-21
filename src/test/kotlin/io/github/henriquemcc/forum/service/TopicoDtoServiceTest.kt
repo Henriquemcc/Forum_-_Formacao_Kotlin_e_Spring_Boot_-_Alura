@@ -23,7 +23,9 @@ class TopicoDtoServiceTest {
     private val topicoRepository: TopicoRepository = mockk {
         every { findByCursoNome(any(), any()) } returns topicos
     }
-    private val topicoViewMapper: TopicoViewMapper = mockk()
+    private val topicoViewMapper: TopicoViewMapper = mockk {
+        every { map(any()) } returns TopicoViewTest.build()
+    }
     private val novoTopicoFormMapper: NovoTopicoFormMapper = mockk()
     private val atualizarTopicoFormMapper: AtualizarTopicoFormMapper = mockk()
     private val topicoService = TopicoService(topicoRepository)
@@ -31,7 +33,6 @@ class TopicoDtoServiceTest {
 
     @Test
     fun `deve listar topicos a partir do nome do curso`() {
-        every { topicoViewMapper.map(any()) } returns TopicoViewTest.build()
         topicoDtoService.listar("Kotlin avançado", paginacao)
         verify(exactly = 1) { topicoRepository.findByCursoNome(any(), any()) }
         verify(exactly = 1) { topicoViewMapper.map(any()) }
