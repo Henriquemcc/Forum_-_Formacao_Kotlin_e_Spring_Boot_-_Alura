@@ -4,13 +4,9 @@ import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.mapper.AtualizarTopicoFormMapper
 import io.github.henriquemcc.forum.mapper.NovoTopicoFormMapper
 import io.github.henriquemcc.forum.mapper.TopicoViewMapper
-import io.github.henriquemcc.forum.model.CursoTest
 import io.github.henriquemcc.forum.model.TopicoTest
 import io.github.henriquemcc.forum.model.TopicoViewTest
-import io.github.henriquemcc.forum.model.UsuarioTest
-import io.github.henriquemcc.forum.repository.CursoRepository
 import io.github.henriquemcc.forum.repository.TopicoRepository
-import io.github.henriquemcc.forum.repository.UsuarioRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

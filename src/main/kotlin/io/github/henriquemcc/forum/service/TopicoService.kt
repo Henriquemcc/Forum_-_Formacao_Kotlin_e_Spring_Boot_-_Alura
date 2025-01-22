@@ -6,9 +6,8 @@ import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.model.Topico
 import io.github.henriquemcc.forum.repository.TopicoRepository
 import org.springframework.data.domain.Page
-import org.springframework.stereotype.Service
 import org.springframework.data.domain.Pageable
-import java.time.LocalDate
+import org.springframework.stereotype.Service
 
 @Service
 class TopicoService(

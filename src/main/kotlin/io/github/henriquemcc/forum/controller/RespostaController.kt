@@ -4,7 +4,6 @@ import io.github.henriquemcc.forum.dto.AtualizarRespostaForm
 import io.github.henriquemcc.forum.dto.NovaRespostaForm
 import io.github.henriquemcc.forum.dto.RespostaView
 import io.github.henriquemcc.forum.service.RespostaDtoService
-import io.github.henriquemcc.forum.service.RespostaService
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
