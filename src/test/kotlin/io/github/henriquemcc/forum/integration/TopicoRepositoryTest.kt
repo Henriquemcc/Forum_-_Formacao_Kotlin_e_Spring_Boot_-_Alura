@@ -21,7 +21,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @DataJpaTest
 @Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@RunWith(SpringRunner::class)
+@RunWith(SpringRunner::class) // https://stackoverflow.com/questions/72958037/autowired-not-working-inside-testcontainers
 class TopicoRepositoryTest {
 
     private val topico = TopicoTest.build()
@@ -33,7 +33,7 @@ class TopicoRepositoryTest {
          */
         @JvmField
         @Container
-        @ClassRule
+        @ClassRule // https://blogs.oracle.com/mysql/post/testing-mysql-applications-with-java-and-testcontainers#:~:text=Could%20not%20Copy-,%40ClassRule,-static%20MySQLContainer%3C!%2D%2D%3F%2D%2D%3E%20mySQLContainer
         val mysqlContainer = MySQLContainer<Nothing>("mysql:9.1.0").apply{
             withDatabaseName("testedb")
             withUsername("myuser")
