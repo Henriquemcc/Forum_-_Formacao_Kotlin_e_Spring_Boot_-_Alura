@@ -4,7 +4,10 @@ import io.github.henriquemcc.forum.dto.TopicoPorCategoriaDto
 import io.github.henriquemcc.forum.model.TopicoTest
 import io.github.henriquemcc.forum.repository.TopicoRepository
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.ClassRule
 import org.junit.Test
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
@@ -30,8 +33,10 @@ class TopicoRepositoryTest {
         /**
          * Cria o container do MySQL no Docker.
          */
+        @JvmField
         @Container
-        private val mysqlContainer = MySQLContainer<Nothing>("mysql:9.1.0").apply{
+        @ClassRule
+        val mysqlContainer = MySQLContainer<Nothing>("mysql:9.1.0").apply{
             withDatabaseName("testedb")
             withUsername("myuser")
             withPassword("secret")
