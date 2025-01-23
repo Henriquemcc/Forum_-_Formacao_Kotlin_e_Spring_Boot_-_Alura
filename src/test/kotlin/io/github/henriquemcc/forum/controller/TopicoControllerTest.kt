@@ -38,7 +38,7 @@ class TopicoControllerTest {
     }
 
     companion object {
-        private const val RECURSO = "/topicos/"
+        private const val RECURSO = "/topicos"
     }
 
     private fun gerarToken(): String {
@@ -49,5 +49,12 @@ class TopicoControllerTest {
     @Test
     fun `deve retornar codigo 400 quando chamar topicos sem token`() {
         mockMvc.get(RECURSO).andExpect { status { is4xxClientError() } }
+    }
+
+    @Test
+    fun `deve retornar codigo 200 quando chamar topicos com token`() {
+        mockMvc.get(RECURSO) {
+            headers { this.setBearerAuth(token) }
+        }.andExpect { status { is2xxSuccessful() } }
     }
 }
