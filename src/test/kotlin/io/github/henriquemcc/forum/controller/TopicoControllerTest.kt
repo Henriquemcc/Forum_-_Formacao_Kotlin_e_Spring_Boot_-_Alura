@@ -1,5 +1,7 @@
 package io.github.henriquemcc.forum.controller
 
+import io.github.henriquemcc.forum.config.JWTUtil
+import io.github.henriquemcc.forum.model.Role
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,13 +26,24 @@ class TopicoControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
+    @Autowired
+    private lateinit var jwtUtil: JWTUtil
+
+    private lateinit var token: String
+
     @BeforeEach
     fun setup() {
+        token = gerarToken()
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).apply<DefaultMockMvcBuilder>(SecurityMockMvcConfigurers.springSecurity()).build()
     }
 
     companion object {
         private const val RECURSO = "/topicos/"
+    }
+
+    private fun gerarToken(): String {
+        val authorities = mutableListOf(Role(1, "LEITURA_ESCRITA"))
+        return jwtUtil.generateToken("ana@email.com", authorities)!!
     }
 
     @Test
