@@ -41,6 +41,8 @@ class SecurityConfiguration(
         http.authorizeHttpRequests {
             it.requestMatchers("/topicos").hasAuthority("LEITURA_ESCRITA")
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
+            it.requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
+            it.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
             it.anyRequest().authenticated()
         }
         http.addFilterBefore(
