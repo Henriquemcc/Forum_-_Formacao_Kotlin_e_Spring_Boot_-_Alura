@@ -3,6 +3,8 @@ package io.github.henriquemcc.forum.controller
 import io.github.henriquemcc.forum.dto.*
 import io.github.henriquemcc.forum.service.TopicoDtoService
 import io.github.henriquemcc.forum.service.TopicoService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import io.swagger.v3.oas.annotations.security.SecurityScheme
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
 import org.springframework.cache.annotation.CacheEvict
@@ -18,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearerAuth")
 class TopicoController(
     private val topicoService: TopicoService,
     private val topicoDtoService: TopicoDtoService
