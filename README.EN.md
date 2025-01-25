@@ -101,3 +101,7 @@ docker run -p 3080:8080 forum
 ```
 
 And the program will execute in the port 3080.
+
+## API Documentation
+
+To access the API documentation, [execute the program](#how-to-execute), and in a web browser access: http://www.localhost:8080/swagger-ui.html
