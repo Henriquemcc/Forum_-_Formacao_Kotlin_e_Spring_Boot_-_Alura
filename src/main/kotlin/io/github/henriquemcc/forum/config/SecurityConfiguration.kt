@@ -36,13 +36,16 @@ class SecurityConfiguration(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
 
+        // https://springdoc.org/#getting-started
+        // https://stackoverflow.com/questions/75782147/error-403-openapi-with-springboot-security-filter-chain
+        val swaggerUiPaths = arrayOf("/swagger-ui.html", "/v3/api-docs/**", "swagger-ui/**")
+
         // https://spring.io/blog/2019/11/21/spring-security-lambda-dsl
         http.csrf { it.disable() }
         http.authorizeHttpRequests {
             it.requestMatchers("/topicos").hasAuthority("LEITURA_ESCRITA")
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
-            it.requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
-            it.requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
+            it.requestMatchers(HttpMethod.GET, *swaggerUiPaths).permitAll()
             it.anyRequest().authenticated()
         }
         http.addFilterBefore(
