@@ -1,6 +1,5 @@
 package io.github.henriquemcc.forum.service
 
-import io.github.henriquemcc.forum.exception.NotAddedException
 import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.model.Resposta
 import io.github.henriquemcc.forum.repository.RespostaRepository

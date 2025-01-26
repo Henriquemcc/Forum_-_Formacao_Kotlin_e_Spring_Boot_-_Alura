@@ -14,6 +14,8 @@ The official files for the course, developed by the instructor, are available in
 
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-seguranca-infraestrutura.svg" width="16px" height="16px"> Kotlin and Spring: Security and Infrastructure (Kotlin e Spring: segurança e infraestrutura)](https://github.com/alura-cursos/2217-kotlin-spring/).
 
+[<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-testes-automatizados-documentacao-api.svg" width="16px" height="16px"> Kotlin and Spring: Automated Testing and API Documentation (Kotlin e Spring: testes automatizados e documentação de API)](https://github.com/alura-cursos/2373-kotlin-spring-testes-automatizados).
+
 ## Courses
 
 The courses in which these files were developed:
@@ -23,6 +25,8 @@ The courses in which these files were developed:
 [<img src="https://www.alura.com.br/assets/api/cursos/api-rest-kotlin-spring-boot-camada-persistencia.svg" width="16px" height="16px"> REST API with Kotlin and Spring Boot: Persistence Layer (API REST com Kotlin e Spring Boot: Camada de persistência)](https://cursos.alura.com.br/course/api-rest-kotlin-spring-boot-camada-persistencia).
 
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-seguranca-infraestrutura.svg" width="16px" height="16px"> Kotlin and Spring: Security and Infrastructure (Kotlin e Spring: segurança e infraestrutura)](https://cursos.alura.com.br/course/kotlin-spring-seguranca-infraestrutura).
+
+[<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-testes-automatizados-documentacao-api.svg" width="16px" height="16px"> Kotlin and Spring: Automated Testing and API Documentation (Kotlin e Spring: testes automatizados e documentação de API)](https://cursos.alura.com.br/course/kotlin-spring-testes-automatizados-documentacao-api).
 
 ## External websites
 
@@ -35,6 +39,8 @@ https://mvnrepository.com
 https://bcrypt-generator.com
 
 https://jwt.io
+
+https://java.testcontainers.org/
 
 ## Requirements
 
@@ -95,3 +101,7 @@ docker run -p 3080:8080 forum
 ```
 
 And the program will execute in the port 3080.
+
+## API Documentation
+
+To access the API documentation, [execute the program](#how-to-execute), and in a web browser access: http://www.localhost:8080/swagger-ui.html

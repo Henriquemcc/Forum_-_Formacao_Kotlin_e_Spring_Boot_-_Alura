@@ -1,6 +1,7 @@
 package io.github.henriquemcc.forum.dto
 
 import io.github.henriquemcc.forum.model.StatusTopico
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 class TopicoView(
@@ -8,5 +9,6 @@ class TopicoView(
     val titulo: String,
     val mensagem: String,
     val status: StatusTopico,
-    val dataCriacao: LocalDateTime
+    val dataCriacao: LocalDateTime,
+    val dataAlteracao: LocalDate?
 )

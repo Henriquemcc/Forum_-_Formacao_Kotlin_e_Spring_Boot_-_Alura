@@ -14,6 +14,8 @@ Os arquivos oficiais do curso, desenvolvidos pelo instrutor, estão disponíveis
 
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-seguranca-infraestrutura.svg" width="16px" height="16px"> Kotlin e Spring: segurança e infraestrutura](https://github.com/alura-cursos/2217-kotlin-spring/).
 
+[<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-testes-automatizados-documentacao-api.svg" width="16px" height="16px"> Kotlin e Spring: testes automatizados e documentação de API](https://github.com/alura-cursos/2373-kotlin-spring-testes-automatizados).
+
 ## Cursos
 
 Os cursos em que estes arquivos foram desenvolvidos:
@@ -23,6 +25,8 @@ Os cursos em que estes arquivos foram desenvolvidos:
 [<img src="https://www.alura.com.br/assets/api/cursos/api-rest-kotlin-spring-boot-camada-persistencia.svg" width="16px" height="16px"> API REST com Kotlin e Spring Boot: Camada de persistência](https://cursos.alura.com.br/course/api-rest-kotlin-spring-boot-camada-persistencia).
 
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-seguranca-infraestrutura.svg" width="16px" height="16px"> Kotlin e Spring: segurança e infraestrutura](https://cursos.alura.com.br/course/kotlin-spring-seguranca-infraestrutura).
+
+[<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-testes-automatizados-documentacao-api.svg" width="16px" height="16px"> Kotlin e Spring: testes automatizados e documentação de API](https://cursos.alura.com.br/course/kotlin-spring-testes-automatizados-documentacao-api).
 
 ## Sites Externos
 
@@ -35,6 +39,8 @@ https://mvnrepository.com
 https://bcrypt-generator.com
 
 https://jwt.io
+
+https://java.testcontainers.org/
 
 ## Requisitos
 
@@ -95,3 +101,7 @@ docker run -p 3080:8080 forum
 ```
 
 E o programa executará na porta 3080.
+
+## Documentação da API
+
+Para acessar a documentação da API, [execute o programa](#como-executar), e em um navegador web acesse: http://www.localhost:8080/swagger-ui.html

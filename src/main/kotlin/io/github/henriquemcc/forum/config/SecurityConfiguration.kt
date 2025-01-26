@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import org.springframework.web.filter.OncePerRequestFilter
 
 
 @Configuration
@@ -37,11 +36,16 @@ class SecurityConfiguration(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain? {
 
+        // https://springdoc.org/#getting-started
+        // https://stackoverflow.com/questions/75782147/error-403-openapi-with-springboot-security-filter-chain
+        val swaggerUiPaths = arrayOf("/swagger-ui.html", "/v3/api-docs/**", "swagger-ui/**")
+
         // https://spring.io/blog/2019/11/21/spring-security-lambda-dsl
         http.csrf { it.disable() }
         http.authorizeHttpRequests {
             it.requestMatchers("/topicos").hasAuthority("LEITURA_ESCRITA")
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
+            it.requestMatchers(HttpMethod.GET, *swaggerUiPaths).permitAll()
             it.anyRequest().authenticated()
         }
         http.addFilterBefore(

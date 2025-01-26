@@ -6,8 +6,8 @@ import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.model.Topico
 import io.github.henriquemcc.forum.repository.TopicoRepository
 import org.springframework.data.domain.Page
-import org.springframework.stereotype.Service
 import org.springframework.data.domain.Pageable
+import org.springframework.stereotype.Service
 
 @Service
 class TopicoService(
@@ -35,6 +35,7 @@ class TopicoService(
         val topicoAnterior = topicoRepository.findById(idTopico).orElseThrow { NotFoundException(notFoundMessage) }
         topicoAnterior.titulo = topico.titulo
         topicoAnterior.mensagem = topico.mensagem
+        topicoAnterior.dataAlteracao = topico.dataAlteracao
         return topicoAnterior
     }
 
