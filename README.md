@@ -16,6 +16,8 @@ Os arquivos oficiais do curso, desenvolvidos pelo instrutor, estão disponíveis
 
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-testes-automatizados-documentacao-api.svg" width="16px" height="16px"> Kotlin e Spring: testes automatizados e documentação de API](https://github.com/alura-cursos/2373-kotlin-spring-testes-automatizados).
 
+[<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-recursos-avancados.svg" width="16px" height="16px"> Kotlin e Spring: recursos avançados](https://github.com/alura-cursos/2519-kotlin-spring-outros-recursos).
+
 ## Cursos
 
 Os cursos em que estes arquivos foram desenvolvidos:
@@ -27,6 +29,8 @@ Os cursos em que estes arquivos foram desenvolvidos:
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-seguranca-infraestrutura.svg" width="16px" height="16px"> Kotlin e Spring: segurança e infraestrutura](https://cursos.alura.com.br/course/kotlin-spring-seguranca-infraestrutura).
 
 [<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-testes-automatizados-documentacao-api.svg" width="16px" height="16px"> Kotlin e Spring: testes automatizados e documentação de API](https://cursos.alura.com.br/course/kotlin-spring-testes-automatizados-documentacao-api).
+
+[<img src="https://www.alura.com.br/assets/api/cursos/kotlin-spring-recursos-avancados.svg" width="16px" height="16px"> Kotlin e Spring: recursos avançados](https://cursos.alura.com.br/course/kotlin-spring-recursos-avancados).
 
 ## Sites Externos
 
