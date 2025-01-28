@@ -1,8 +1,10 @@
 package io.github.henriquemcc.forum.model
 
 import jakarta.persistence.*
+import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
+import kotlin.jvm.Transient
 
 @Entity
 data class Topico(
@@ -27,4 +29,8 @@ data class Topico(
     val respostas: List<Resposta> = ArrayList(),
 
     var dataAlteracao: LocalDate? = null
-)
+): Serializable {
+    @JvmField
+    @Transient
+    val serialVersionUID: Long = 1L
+}

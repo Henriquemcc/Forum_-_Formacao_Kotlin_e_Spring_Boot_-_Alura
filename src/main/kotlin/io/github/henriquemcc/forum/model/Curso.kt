@@ -4,6 +4,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import java.io.Serializable
 
 @Entity
 data class Curso(
@@ -13,4 +14,8 @@ data class Curso(
 
     val nome: String,
     val categoria: String
-)
+): Serializable {
+    @JvmField
+    @Transient
+    val serialVersionUID: Long = 1L
+}

@@ -2,6 +2,8 @@ package io.github.henriquemcc.forum.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
+import java.io.Serializable
+import kotlin.jvm.Transient
 
 @Entity
 data class Usuario(
@@ -18,4 +20,8 @@ data class Usuario(
         inverseJoinColumns = [JoinColumn(name = "role_id")]
     )
     val role: List<Role> = mutableListOf()
-)
+): Serializable {
+    @JvmField
+    @Transient
+    val serialVersionUID: Long = 1L
+}
