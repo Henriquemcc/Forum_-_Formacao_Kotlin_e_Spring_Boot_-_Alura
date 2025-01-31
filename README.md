@@ -109,3 +109,21 @@ E o programa executará na porta 3080.
 ## Documentação da API
 
 Para acessar a documentação da API, [execute o programa](#como-executar), e em um navegador web acesse: http://www.localhost:8080/swagger-ui.html
+
+## Redis
+
+### Testando o cache
+
+Para testar o cache do Redis, com o [programa em execução](#como-executar), abra um terminal (ou prompt de comando) e digite o seguinte comando:
+
+```
+docker exec -it redis-local bash
+```
+
+E depois:
+
+```
+redis-cli monitor
+```
+
+Dessa forma será mostrada a interação da aplicação com o Redis. 
