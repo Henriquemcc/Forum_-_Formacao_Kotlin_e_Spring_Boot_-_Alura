@@ -44,6 +44,7 @@ class SecurityConfiguration(
         http.csrf { it.disable() }
         http.authorizeHttpRequests {
             it.requestMatchers("/topicos").hasAuthority("LEITURA_ESCRITA")
+            it.requestMatchers("/respostas").hasAuthority("LEITURA_ESCRITA")
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
             it.requestMatchers(HttpMethod.GET, *swaggerUiPaths).permitAll()
             it.anyRequest().authenticated()
