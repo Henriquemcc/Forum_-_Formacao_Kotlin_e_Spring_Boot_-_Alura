@@ -4,6 +4,7 @@ import io.github.henriquemcc.forum.dto.AtualizarRespostaForm
 import io.github.henriquemcc.forum.dto.NovaRespostaForm
 import io.github.henriquemcc.forum.dto.RespostaView
 import io.github.henriquemcc.forum.service.RespostaDtoService
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import jakarta.transaction.Transactional
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -13,6 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping("/topicos/{idTopico}/respostas")
+@SecurityRequirement(name = "bearerAuth")
 class RespostaController(private val respostaDtoService: RespostaDtoService) {
 
     @GetMapping
