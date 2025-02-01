@@ -43,7 +43,7 @@ class RespostaController(
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<RespostaView> {
         val respostaView = respostaDtoService.cadastrar(novaRespostaForm)
-        val uri = uriBuilder.path("/respostas").build().toUri()
+        val uri = uriBuilder.path("/respostas/${respostaView.id}").build().toUri()
         return ResponseEntity.created(uri).body(respostaView)
     }
 

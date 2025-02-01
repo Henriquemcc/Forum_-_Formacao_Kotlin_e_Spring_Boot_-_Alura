@@ -46,7 +46,7 @@ class TopicoController(
         uriBuilder: UriComponentsBuilder
     ): ResponseEntity<TopicoView> {
         val topicoView = topicoDtoService.cadastrar(form)
-        val uri = uriBuilder.path("/topicos/").build().toUri()
+        val uri = uriBuilder.path("/topicos/${topicoView.id}").build().toUri()
         return ResponseEntity.created(uri).body(topicoView)
     }
 
