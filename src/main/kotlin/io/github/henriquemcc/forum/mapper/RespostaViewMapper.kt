@@ -12,7 +12,8 @@ class RespostaViewMapper : Mapper<Resposta, RespostaView> {
             id = t.id ?: 0,
             mensagem = t.mensagem,
             dataCriacao = t.dataCriacao,
-            solucao = t.solucao
+            solucao = t.solucao,
+            idTopico = t.topico?.id
         )
     }
 }
