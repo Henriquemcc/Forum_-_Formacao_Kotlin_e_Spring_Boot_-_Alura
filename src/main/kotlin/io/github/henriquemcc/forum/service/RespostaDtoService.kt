@@ -3,6 +3,8 @@ package io.github.henriquemcc.forum.service
 import io.github.henriquemcc.forum.dto.AtualizarRespostaForm
 import io.github.henriquemcc.forum.dto.NovaRespostaForm
 import io.github.henriquemcc.forum.dto.RespostaView
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Page
 import io.github.henriquemcc.forum.mapper.AtualizarRespostaFormMapper
 import io.github.henriquemcc.forum.mapper.NovaRespostaFormMapper
 import io.github.henriquemcc.forum.mapper.RespostaViewMapper
@@ -20,13 +22,13 @@ class RespostaDtoService(
         return respostaService.listarPorIdTopico(idTopico).map { r -> respostaViewMapper.map(r) }
     }
 
-    fun buscarPorId(idTopico: Long, idResposta: Long): RespostaView {
-        return respostaViewMapper.map(respostaService.buscarPorId(idTopico, idResposta))
+    fun buscarPorIdRespostaIdTopico(idTopico: Long, idResposta: Long): RespostaView {
+        return respostaViewMapper.map(respostaService.buscarPorIdRespostaIdTopico(idTopico, idResposta))
     }
 
-    fun cadastrar(novaRespostaForm: NovaRespostaForm, idTopico: Long): RespostaView {
+    fun cadastrar(novaRespostaForm: NovaRespostaForm, idTopico: Long? = null): RespostaView {
         val resposta = novaRespostaFormMapper.map(novaRespostaForm)
-        resposta.topico = topicoService.buscarPorId(idTopico)
+        if (idTopico != null) resposta.topico = topicoService.buscarPorId(idTopico)
         return respostaViewMapper.map(respostaService.cadastrar(resposta))
     }
 
@@ -36,5 +38,13 @@ class RespostaDtoService(
 
     fun deletar(id: Long) {
         respostaService.deletar(id)
+    }
+
+    fun listar(tituloTopico: String?, paginacao: Pageable): Page<RespostaView> {
+        return respostaService.listar(tituloTopico, paginacao).map { r -> respostaViewMapper.map(r) }
+    }
+
+    fun buscarPorId(id: Long): RespostaView {
+        return respostaViewMapper.map(respostaService.buscarPorId(id))
     }
 }

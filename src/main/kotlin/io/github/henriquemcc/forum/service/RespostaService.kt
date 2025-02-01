@@ -4,6 +4,8 @@ import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.model.Resposta
 import io.github.henriquemcc.forum.repository.RespostaRepository
 import org.springframework.stereotype.Service
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Page
 
 @Service
 class RespostaService(
@@ -15,7 +17,7 @@ class RespostaService(
         return respostaRepository.findAll().filter { r -> r.topico == topicoService.buscarPorId(idTopico) }
     }
 
-    fun buscarPorId(idTopico: Long, idResposta: Long): Resposta {
+    fun buscarPorIdRespostaIdTopico(idTopico: Long, idResposta: Long): Resposta {
         return respostaRepository.findAll().first{ r -> (r.topico == topicoService.buscarPorId(idTopico) && r.id == idResposta)}
     }
 
@@ -32,5 +34,16 @@ class RespostaService(
 
     fun deletar(id: Long) {
         respostaRepository.deleteById(id)
+    }
+
+    fun listar(tituloTopico: String?, paginacao: Pageable): Page<Resposta> {
+        return when {
+            tituloTopico == null -> respostaRepository.findAll(paginacao)
+            else -> respostaRepository.findByTopicoTitulo(tituloTopico, paginacao)
+        }
+    }
+
+    fun buscarPorId(id: Long): Resposta {
+        return respostaRepository.findById(id).orElseThrow{ NotFoundException(notFoundMessage) }
     }
 }
