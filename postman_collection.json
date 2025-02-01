@@ -178,7 +178,7 @@
 			]
 		},
 		{
-			"name": "Resposta",
+			"name": "Resposta-Topico",
 			"item": [
 				{
 					"name": "POST Respostas",
@@ -299,6 +299,119 @@
 			]
 		},
 		{
+			"name": "Resposta",
+			"item": [
+				{
+					"name": "POST Respostas",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensagem\":\"Como declaro uma variavel em Kotlin1\",\r\n    \"idAutor\": 1,\r\n    \"idTopico\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/respostas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Respostas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/respostas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Resposta 1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensagem\": \"Resposta alterada!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/respostas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Resposta 1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/respostas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "LOGIN",
 			"request": {
 				"method": "POST",
@@ -334,7 +447,14 @@
 		}
 	],
 	"auth": {
-		"type": "inherit"
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmFAZW1haWwuY29tIiwicm9sZSI6W3siaWQiOjEsIm5vbWUiOiJMRUlUVVJBX0VTQ1JJVEEifV0sImV4cCI6MTczNjg4NjI5OX0.rm95p2IxGG6rZgKzyTi_Zg71zNXQ3XbZfztVbHiPDp-7HDEJJa9I78WMX3S85YudG00XeI5Ph9Ya79IUfDXeqw",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{
