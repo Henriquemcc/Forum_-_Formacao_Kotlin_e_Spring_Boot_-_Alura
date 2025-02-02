@@ -45,6 +45,7 @@ class SecurityConfiguration(
         http.authorizeHttpRequests {
             it.requestMatchers("/topicos").hasAuthority("LEITURA_ESCRITA")
             it.requestMatchers("/respostas").hasAuthority("LEITURA_ESCRITA")
+            it.requestMatchers("/relatorios").hasAuthority("ADMIN")
             it.requestMatchers(HttpMethod.POST, "/login").permitAll()
             it.requestMatchers(HttpMethod.GET, *swaggerUiPaths).permitAll()
             it.anyRequest().authenticated()
