@@ -3,6 +3,7 @@ package io.github.henriquemcc.forum.configuration
 import org.junit.ClassRule
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
+import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 
@@ -22,15 +23,32 @@ abstract class DatabaseContainerConfiguration {
         }
 
         /**
+         * Cria o container do Redis no Docker.
+         */
+        @JvmField
+        @Container
+        @ClassRule
+        val redisContainer = GenericContainer<Nothing>("redis:7.4.2").apply {
+            withExposedPorts(6379)
+        }
+
+
+        /**
          * Define as propriedades equivalentes ao 'application.properties'.
          */
         @JvmStatic
         @DynamicPropertySource
         fun properties(registry: DynamicPropertyRegistry) {
+
+            // MySQL
             registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl)
             registry.add("spring.datasource.password", mysqlContainer::getPassword)
             registry.add("spring.datasource.username", mysqlContainer::getUsername)
             registry.add("spring.datasource.driverClassName", mysqlContainer::getDriverClassName)
+
+            // Redis
+            registry.add("spring.redis.host", redisContainer::getHost)
+            registry.add("spring.redis.port", redisContainer::getFirstMappedPort)
         }
     }
 }
