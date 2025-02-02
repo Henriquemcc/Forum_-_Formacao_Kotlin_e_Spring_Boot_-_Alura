@@ -46,6 +46,8 @@ https://jwt.io
 
 https://java.testcontainers.org/
 
+https://mailtrap.io/
+
 ## Requirements
 
 To compile and run this program you must have the following programs installed:
