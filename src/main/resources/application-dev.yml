@@ -1,4 +1,7 @@
 spring:
+  config:
+    import:
+      - classpath:environment.yml
   docker:
     compose:
       file: docker-compose.dev.yml
@@ -19,18 +22,18 @@ spring:
     host: localhost
     port: 6379
   mail:
-    host:
-    port:
-    username:
-    password:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: ${MAILTRAP_USERNAME}
+    password: ${MAILTRAP_PASSWORD}
     properties:
       mail:
         transport:
-          protocol:
-        debug:
+          protocol: smtp
+        debug: true
         smtp:
-          auth:
+          auth: true
           starttls:
-            enable:
+            enable: true
 jwt:
   secret: dpHA5A$z7ClCoaM%3DT4zfZzEZ0rf4TPY0mNTgj%GP5NXDwTVB#i5HYxSeejmIpw*MOO9^t&a9PhV1wJT*MdifGT*dCkL1Miala6zs2W#V2xBaU9@s1*TRUHRZxflaG3
