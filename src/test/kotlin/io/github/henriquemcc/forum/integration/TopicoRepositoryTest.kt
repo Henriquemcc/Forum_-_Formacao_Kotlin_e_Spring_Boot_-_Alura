@@ -1,5 +1,6 @@
 package io.github.henriquemcc.forum.integration
 
+import io.github.henriquemcc.forum.configuration.DatabaseContainerConfiguration
 import io.github.henriquemcc.forum.dto.TopicoPorCategoriaDto
 import io.github.henriquemcc.forum.model.TopicoTest
 import io.github.henriquemcc.forum.repository.TopicoRepository
@@ -22,36 +23,9 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @RunWith(SpringRunner::class) // https://stackoverflow.com/questions/72958037/autowired-not-working-inside-testcontainers
-class TopicoRepositoryTest {
+class TopicoRepositoryTest: DatabaseContainerConfiguration() {
 
     private val topico = TopicoTest.build()
-
-    companion object {
-
-        /**
-         * Cria o container do MySQL no Docker.
-         */
-        @JvmField
-        @Container
-        @ClassRule // https://blogs.oracle.com/mysql/post/testing-mysql-applications-with-java-and-testcontainers#:~:text=Could%20not%20Copy-,%40ClassRule,-static%20MySQLContainer%3C!%2D%2D%3F%2D%2D%3E%20mySQLContainer
-        val mysqlContainer = MySQLContainer<Nothing>("mysql:9.1.0").apply{
-            withDatabaseName("testedb")
-            withUsername("myuser")
-            withPassword("secret")
-        }
-
-        /**
-         * Define as propriedades equivalentes ao 'application.properties'.
-         */
-        @JvmStatic
-        @DynamicPropertySource
-        fun properties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl)
-            registry.add("spring.datasource.password", mysqlContainer::getPassword)
-            registry.add("spring.datasource.username", mysqlContainer::getUsername)
-            registry.add("spring.datasource.driverClassName", mysqlContainer::getDriverClassName)
-        }
-    }
 
     @Autowired
     private lateinit var topicoRepository: TopicoRepository
