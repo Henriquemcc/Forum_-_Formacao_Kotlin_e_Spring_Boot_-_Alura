@@ -1,6 +1,7 @@
 services:
   mysql:
     image: 'mysql:9.1.0'
+    container_name: mysql-container
     environment:
       - 'MYSQL_DATABASE=forum'
       - 'MYSQL_PASSWORD=secret'
