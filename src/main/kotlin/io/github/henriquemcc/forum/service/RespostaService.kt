@@ -11,7 +11,8 @@ import org.springframework.data.domain.Page
 class RespostaService(
     private val respostaRepository: RespostaRepository,
     private val notFoundMessage: String = "Resposta nao encontrada!",
-    private val topicoService: TopicoService
+    private val topicoService: TopicoService,
+    private val emailService: EmailService
 ) {
     fun listarPorIdTopico(idTopico: Long): List<Resposta> {
         return respostaRepository.findAll().filter { r -> r.topico == topicoService.buscarPorId(idTopico) }
@@ -23,6 +24,9 @@ class RespostaService(
 
     fun cadastrar(resposta: Resposta): Resposta {
         respostaRepository.save(resposta)
+        if (resposta.autor != null && resposta.topico != null)
+            emailService.notificar(resposta.autor, resposta.topico!!)
+
         return resposta
     }
 
