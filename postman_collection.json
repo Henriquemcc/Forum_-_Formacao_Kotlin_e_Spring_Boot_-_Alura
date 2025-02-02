@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3d9abb5d-cfd1-4711-982f-5201b3b1671c",
+		"_postman_id": "11e9b98c-8337-404d-ba68-89f272c123aa",
 		"name": "API REST com Kotlin e Spring Boot",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21485404"
@@ -412,6 +412,30 @@
 			]
 		},
 		{
+			"name": "Relatorio",
+			"item": [
+				{
+					"name": "GET Relatorio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/relatorios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"relatorios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "LOGIN",
 			"request": {
 				"method": "POST",
@@ -424,7 +448,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"ana@email.com\",\n    \"password\": \"123456\"\n}",
+					"raw": "{\n    \"username\": \"admin@email.com\",\n    \"password\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -447,14 +471,7 @@
 		}
 	],
 	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmFAZW1haWwuY29tIiwicm9sZSI6W3siaWQiOjEsIm5vbWUiOiJMRUlUVVJBX0VTQ1JJVEEifV0sImV4cCI6MTczNjg4NjI5OX0.rm95p2IxGG6rZgKzyTi_Zg71zNXQ3XbZfztVbHiPDp-7HDEJJa9I78WMX3S85YudG00XeI5Ph9Ya79IUfDXeqw",
-				"type": "string"
-			}
-		]
+		"type": "inherit"
 	},
 	"event": [
 		{
