@@ -260,6 +260,14 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>${springboot.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.redis/testcontainers-redis -->
+        <dependency>
+            <groupId>com.redis</groupId>
+            <artifactId>testcontainers-redis</artifactId>
+            <version>2.2.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,5 +1,6 @@
 package io.github.henriquemcc.forum.configuration
 
+import com.redis.testcontainers.RedisContainer
 import org.junit.ClassRule
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
@@ -28,9 +29,7 @@ abstract class DatabaseContainerConfiguration {
         @JvmField
         @Container
         @ClassRule
-        val redisContainer = GenericContainer<Nothing>("redis:7.4.2").apply {
-            withExposedPorts(6379)
-        }
+        val redisContainer = RedisContainer("redis:7.4.2").apply {  }
 
 
         /**
