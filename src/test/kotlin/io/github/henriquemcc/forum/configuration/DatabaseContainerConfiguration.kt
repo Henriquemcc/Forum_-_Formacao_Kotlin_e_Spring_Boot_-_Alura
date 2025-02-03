@@ -4,7 +4,6 @@ import com.redis.testcontainers.RedisContainer
 import org.junit.ClassRule
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
-import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 
