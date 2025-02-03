@@ -28,7 +28,9 @@ abstract class DatabaseContainerConfiguration {
         @JvmField
         @Container
         @ClassRule
-        val redisContainer = RedisContainer("redis:7.4.2").apply {  }
+        val redisContainer = RedisContainer("redis:7.4.2").apply {
+            withExposedPorts(6379)
+        }
 
 
         /**
