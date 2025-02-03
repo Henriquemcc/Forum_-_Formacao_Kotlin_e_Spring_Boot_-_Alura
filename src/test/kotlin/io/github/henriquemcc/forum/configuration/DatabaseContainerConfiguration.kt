@@ -5,6 +5,7 @@ import org.junit.ClassRule
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.MySQLContainer
+import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.junit.jupiter.Container
 
 abstract class DatabaseContainerConfiguration {
@@ -30,6 +31,7 @@ abstract class DatabaseContainerConfiguration {
         @ClassRule
         val redisContainer = RedisContainer("redis:7.4.2").apply {
             withExposedPorts(6379)
+            waitingFor(Wait.forListeningPort())
         }
 
 
@@ -48,7 +50,7 @@ abstract class DatabaseContainerConfiguration {
 
             // Redis
             registry.add("spring.redis.host", redisContainer::getHost)
-            registry.add("spring.redis.port", redisContainer::getFirstMappedPort)
+            registry.add("spring.redis.port") { redisContainer.getMappedPort(6379) }
         }
     }
 }
