@@ -1,6 +1,7 @@
 package io.github.henriquemcc.forum.controller
 
 import io.github.henriquemcc.forum.config.JWTUtil
+import io.github.henriquemcc.forum.configuration.DatabaseContainerConfiguration
 import io.github.henriquemcc.forum.model.Role
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -13,12 +14,14 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers
+import org.testcontainers.junit.jupiter.Testcontainers
 
 
 // https://github.com/spring-projects/spring-security-samples/blob/main/servlet/spring-boot/java/hello-security-explicit/src/test/java/example/HelloSecurityExplicitApplicationTests.java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class TopicoControllerTest {
+@Testcontainers
+class TopicoControllerTest: DatabaseContainerConfiguration() {
 
     @Autowired
     private lateinit var webApplicationContext: WebApplicationContext

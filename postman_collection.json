@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3d9abb5d-cfd1-4711-982f-5201b3b1671c",
+		"_postman_id": "11e9b98c-8337-404d-ba68-89f272c123aa",
 		"name": "API REST com Kotlin e Spring Boot",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "21485404"
@@ -178,7 +178,7 @@
 			]
 		},
 		{
-			"name": "Resposta",
+			"name": "Resposta-Topico",
 			"item": [
 				{
 					"name": "POST Respostas",
@@ -299,6 +299,143 @@
 			]
 		},
 		{
+			"name": "Resposta",
+			"item": [
+				{
+					"name": "POST Respostas",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensagem\":\"Como declaro uma variavel em Kotlin1\",\r\n    \"idAutor\": 1,\r\n    \"idTopico\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/respostas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Respostas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/respostas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Resposta 1",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensagem\": \"Resposta alterada!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/respostas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Resposta 1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/respostas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"respostas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Relatorio",
+			"item": [
+				{
+					"name": "GET Relatorio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/relatorios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"relatorios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "LOGIN",
 			"request": {
 				"method": "POST",
@@ -311,7 +448,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"ana@email.com\",\n    \"password\": \"123456\"\n}",
+					"raw": "{\n    \"username\": \"admin@email.com\",\n    \"password\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -4,23 +4,29 @@ import io.github.henriquemcc.forum.exception.NotFoundException
 import io.github.henriquemcc.forum.model.Resposta
 import io.github.henriquemcc.forum.repository.RespostaRepository
 import org.springframework.stereotype.Service
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Page
 
 @Service
 class RespostaService(
     private val respostaRepository: RespostaRepository,
     private val notFoundMessage: String = "Resposta nao encontrada!",
-    private val topicoService: TopicoService
+    private val topicoService: TopicoService,
+    private val emailService: EmailService
 ) {
     fun listarPorIdTopico(idTopico: Long): List<Resposta> {
         return respostaRepository.findAll().filter { r -> r.topico == topicoService.buscarPorId(idTopico) }
     }
 
-    fun buscarPorId(idTopico: Long, idResposta: Long): Resposta {
+    fun buscarPorIdRespostaIdTopico(idTopico: Long, idResposta: Long): Resposta {
         return respostaRepository.findAll().first{ r -> (r.topico == topicoService.buscarPorId(idTopico) && r.id == idResposta)}
     }
 
     fun cadastrar(resposta: Resposta): Resposta {
         respostaRepository.save(resposta)
+        if (resposta.autor != null && resposta.topico != null)
+            emailService.notificar(resposta.autor, resposta.topico!!)
+
         return resposta
     }
 
@@ -32,5 +38,16 @@ class RespostaService(
 
     fun deletar(id: Long) {
         respostaRepository.deleteById(id)
+    }
+
+    fun listar(tituloTopico: String?, paginacao: Pageable): Page<Resposta> {
+        return when {
+            tituloTopico == null -> respostaRepository.findAll(paginacao)
+            else -> respostaRepository.findByTopicoTitulo(tituloTopico, paginacao)
+        }
+    }
+
+    fun buscarPorId(id: Long): Resposta {
+        return respostaRepository.findById(id).orElseThrow{ NotFoundException(notFoundMessage) }
     }
 }
