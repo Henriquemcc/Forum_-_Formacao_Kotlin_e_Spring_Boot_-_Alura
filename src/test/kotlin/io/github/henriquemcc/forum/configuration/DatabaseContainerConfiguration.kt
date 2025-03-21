@@ -49,7 +49,8 @@ abstract class DatabaseContainerConfiguration {
             registry.add("spring.datasource.driverClassName", mysqlContainer::getDriverClassName)
 
             // Redis
-            registry.add("spring.redis.host", redisContainer::getHost)
+            //registry.add("spring.redis.host", redisContainer::getHost)
+            registry.add("spring.redis.host") { "127.0.0.1" }
             registry.add("spring.redis.port") { redisContainer.getMappedPort(6379) }
         }
     }

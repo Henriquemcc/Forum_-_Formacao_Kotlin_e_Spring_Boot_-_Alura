@@ -1,5 +1,6 @@
 package io.github.henriquemcc.forum.configuration
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.RedisConnectionFactory
@@ -10,8 +11,11 @@ import org.springframework.data.redis.core.StringRedisTemplate
 @Configuration
 class RedisConfig {
     @Bean
-    fun redisConnectionFactory(): LettuceConnectionFactory {
-        return LettuceConnectionFactory(RedisStandaloneConfiguration("localhost", 6379))
+    fun redisConnectionFactory(
+        @Value("\${spring.redis.host}") host: String,
+        @Value("\${spring.redis.port}") port: Int
+    ): LettuceConnectionFactory {
+        return LettuceConnectionFactory(RedisStandaloneConfiguration(host, port))
     }
 
     @Bean
