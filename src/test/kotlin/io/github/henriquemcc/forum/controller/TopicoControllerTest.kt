@@ -41,7 +41,7 @@ class TopicoControllerTest: DatabaseContainerConfiguration() {
     }
 
     companion object {
-        private const val RECURSO = "/topico"
+        private const val RECURSO = "/topicos"
         private const val RECURSO_ID = RECURSO.plus("/%d")
     }
 
